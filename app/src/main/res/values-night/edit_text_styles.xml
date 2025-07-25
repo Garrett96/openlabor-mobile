@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom styles for EditText components in dark mode -->
+    <style name="Widget.Tempus.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textColorHint">@color/accent_dark</item>
+        <item name="android:background">@color/dark_surface</item>
+        <item name="android:textCursorDrawable">@color/accent</item>
+        <item name="colorControlNormal">@color/accent_dark</item>
+        <item name="colorControlActivated">@color/accent</item>
+        <item name="colorControlHighlight">@color/accent</item>
+    </style>
+    
+    <!-- TextInputLayout style for dark mode -->
+    <style name="Widget.Tempus.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/accent</item>
+        <item name="hintTextColor">@color/accent</item>
+        <item name="android:textColorHint">@color/accent_dark</item>
+        <item name="boxBackgroundColor">@color/dark_surface</item>
+        <item name="errorTextColor">@color/accent_dark</item>
+    </style>
+    
+    <!-- AlertDialog EditText style for dark mode -->
+    <style name="ThemeOverlay.Tempus.Dialog.EditText" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="colorControlNormal">@color/accent_dark</item>
+        <item name="colorControlActivated">@color/accent</item>
+        <item name="colorControlHighlight">@color/accent</item>
+        <item name="editTextColor">@color/accent</item>
+        <item name="android:editTextColor">@color/accent</item>
+        <item name="android:textColorHint">@color/accent_dark</item>
+    </style>
+</resources>

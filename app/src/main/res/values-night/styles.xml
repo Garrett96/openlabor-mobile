@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Card styles for night mode -->
+    <style name="CardView.Tempus" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/dark_card_background</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="contentPadding">16dp</item>
+        <item name="strokeColor">@color/accent_dark</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+    
+    <!-- Text styles for night mode -->
+    <style name="TextAppearance.Tempus.Title" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="TextAppearance.Tempus.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="TextAppearance.Tempus.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/accent_light</item>
+    </style>
+    
+    <!-- Button styles for night mode -->
+    <style name="Button.Tempus.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/dark_surface</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="rippleColor">@color/accent_dark</item>
+        <item name="strokeColor">@color/accent_dark</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+    
+    <style name="Button.Tempus.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/accent</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="rippleColor">@color/accent_dark</item>
+    </style>
+    
+    <style name="Button.Tempus.Secondary" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/dark_surface</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="strokeColor">@color/accent</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+    
+    <!-- FloatingActionButton style for night mode -->
+    <style name="FAB.Tempus" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/dark_surface</item>
+        <item name="tint">@color/accent</item>
+        <item name="borderWidth">1dp</item>
+        <item name="strokeColor">@color/accent</item>
+        <item name="rippleColor">@color/accent_dark</item>
+    </style>
+    
+    <!-- Chip styles for night mode -->
+    <style name="Chip.Tempus" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipBackgroundColor">@color/dark_surface</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="chipStrokeColor">@color/accent_dark</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="rippleColor">@color/accent_dark</item>
+    </style>
+    
+    <!-- Switch style for night mode -->
+    <style name="Switch.Tempus" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="thumbTint">@color/accent</item>
+        <item name="trackTint">@color/dark_surface</item>
+    </style>
+</resources>

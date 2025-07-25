@@ -1,0 +1,59 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Tempus" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryVariant">@color/accent_dark</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/white</item>
+        <item name="cardBackgroundColor">@color/white</item>
+    </style>
+
+    <style name="Theme.Tempus.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Tempus.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="cardBackgroundColor">@color/white</item>
+    </style>
+
+    <style name="Theme.Tempus.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    
+    <!-- Dialog theme -->
+    <style name="Theme.Tempus.Dialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="android:background">?attr/cardBackgroundColor</item>
+        <item name="android:textColorPrimary">@color/primary</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.Tempus.Button.Dialog</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.Tempus.Button.Dialog.Negative</item>
+    </style>
+    
+    <!-- Button styles -->
+    <style name="Widget.Tempus.Button" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/primary</item>
+    </style>
+    
+    <style name="Widget.Tempus.Button.Dialog" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/primary</item>
+    </style>
+    
+    <style name="Widget.Tempus.Button.Dialog.Negative" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/primary_light</item>
+    </style>
+    
+    <style name="Widget.Tempus.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/primary</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
+</resources>

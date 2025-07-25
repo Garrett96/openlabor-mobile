@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom styles for EditText components in light mode -->
+    <style name="Widget.Tempus.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textColorHint">@color/primary_light</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textCursorDrawable">@color/primary</item>
+        <item name="colorControlNormal">@color/primary_light</item>
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="colorControlHighlight">@color/primary</item>
+    </style>
+    
+    <!-- TextInputLayout style for light mode -->
+    <style name="Widget.Tempus.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/primary</item>
+        <item name="hintTextColor">@color/primary</item>
+        <item name="android:textColorHint">@color/primary_light</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="errorTextColor">@color/accent</item>
+    </style>
+    
+    <!-- AlertDialog EditText style for light mode -->
+    <style name="ThemeOverlay.Tempus.Dialog.EditText" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="colorControlNormal">@color/primary_light</item>
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="colorControlHighlight">@color/primary</item>
+        <item name="editTextColor">@color/primary</item>
+        <item name="android:editTextColor">@color/primary</item>
+        <item name="android:textColorHint">@color/primary_light</item>
+    </style>
+</resources>

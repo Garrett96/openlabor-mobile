@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Card styles -->
+    <style name="CardView.Tempus" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="contentPadding">16dp</item>
+    </style>
+    
+    <!-- Text styles -->
+    <style name="TextAppearance.Tempus.Title" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="TextAppearance.Tempus.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="TextAppearance.Tempus.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    
+    <!-- Button styles -->
+    <style name="Button.Tempus.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    
+    <style name="Button.Tempus.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/primary</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
+    
+    <style name="Button.Tempus.Secondary" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/accent</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    
+    <!-- FloatingActionButton style -->
+    <style name="FAB.Tempus" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/accent</item>
+        <item name="tint">@color/primary</item>
+    </style>
+    
+    <!-- Chip styles -->
+    <style name="Chip.Tempus" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipBackgroundColor">@color/primary_light</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    
+    <!-- Switch style -->
+    <style name="Switch.Tempus" parent="Widget.MaterialComponents.CompoundButton.Switch">
+        <item name="thumbTint">@color/accent</item>
+        <item name="trackTint">@color/primary_light</item>
+    </style>
+</resources>
