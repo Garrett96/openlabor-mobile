@@ -159,13 +159,12 @@ class TimesheetDialog : DialogFragment() {
         dateButton = Button(context).apply {
             background = ContextCompat.getDrawable(context, R.drawable.btn_outline)
             setTextColor(ContextCompat.getColor(context, R.color.accent))
-            text = formatDate(selectedDate) // Set text directly without calling updateDateButtonText
+            text = formatDate(selectedDate) // Initialize with formatted date text
             
             setOnClickListener {
                 showDatePicker()
             }
         }
-        // Ensure dateButton is initialized with proper text
         dialogLayout.addView(dateButton)
         
         // Time selectors
@@ -261,9 +260,8 @@ class TimesheetDialog : DialogFragment() {
             requireContext(),
             { _, year, month, dayOfMonth ->
                 selectedDate = LocalDate.of(year, month + 1, dayOfMonth)
-                if (::dateButton.isInitialized) {
-                    dateButton.text = formatDate(selectedDate)
-                }
+                // Initialize the button text after the button is created
+                dateButton.text = formatDate(selectedDate)
             },
             selectedDate.year,
             selectedDate.monthValue - 1,
@@ -303,8 +301,12 @@ class TimesheetDialog : DialogFragment() {
     }
 
     private fun updateDateButtonText() {
-        if (::dateButton.isInitialized) {
-            dateButton.text = formatDate(selectedDate)
+        try {
+            if (::dateButton.isInitialized) {
+                dateButton.text = formatDate(selectedDate)
+            }
+        } catch (e: Exception) {
+            // Ignore if not initialized yet
         }
     }
     
@@ -314,14 +316,22 @@ class TimesheetDialog : DialogFragment() {
     }
     
     private fun updateStartTimeButtonText() {
-        if (::startTimeButton.isInitialized) {
-            startTimeButton.text = formatTime("Start", selectedStartTime)
+        try {
+            if (::startTimeButton.isInitialized) {
+                startTimeButton.text = formatTime("Start", selectedStartTime)
+            }
+        } catch (e: Exception) {
+            // Ignore if not initialized yet
         }
     }
     
     private fun updateEndTimeButtonText() {
-        if (::endTimeButton.isInitialized) {
-            endTimeButton.text = formatTime("End", selectedEndTime)
+        try {
+            if (::endTimeButton.isInitialized) {
+                endTimeButton.text = formatTime("End", selectedEndTime)
+            }
+        } catch (e: Exception) {
+            // Ignore if not initialized yet
         }
     }
     
