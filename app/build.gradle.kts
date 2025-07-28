@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.labs.tempus"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.labs.tempus"
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -28,11 +28,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
         freeCompilerArgs = listOf(
             "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
             "-opt-in=com.marosseleng.compose.material3.datetimepickers.date.ui.dialog.ExperimentalMaterial3DatePickerApi",
@@ -40,14 +40,12 @@ android {
         )
     }
     buildFeatures {
-        viewBinding = true
         compose = true
+        viewBinding = true
     }
-    
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
-    
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
