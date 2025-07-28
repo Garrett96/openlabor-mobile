@@ -30,16 +30,9 @@ object AddTimeEntryHelper {
         // Get all employees
         val employees = repository.getAllEmployees()
         
-        // If no employees, offer to create one
+        // If no employees, go directly to create one
         if (employees.isEmpty()) {
-            AlertDialog.Builder(context, R.style.Theme_Tempus_Dialog)
-                .setTitle("No Employees")
-                .setMessage("You need to add an employee before you can add time entries.")
-                .setPositiveButton("Add Employee") { _, _ ->
-                    showAddEmployeeDialog(context, fragmentManager, repository)
-                }
-                .setNegativeButton("Cancel", null)
-                .show()
+            showAddEmployeeDialog(context, fragmentManager, repository)
             return
         }
         
