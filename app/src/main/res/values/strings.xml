@@ -2,8 +2,8 @@
     <string name="app_name">Tempus</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Tempus Timesheet</string>
-    <string name="nav_header_subtitle">Track employee hours with ease</string>
+    <string name="nav_header_title">Tempus</string>
+    <string name="nav_header_subtitle">Multi-Person Hours Tracking</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 

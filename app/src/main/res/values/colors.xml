@@ -11,8 +11,8 @@
     <!-- Tempus app colors -->
     <color name="primary">#060627</color>
     <color name="primary_dark">#060627</color>
-    <color name="primary_light">#001643</color>
-    <color name="accent">#734726</color>
+    <color name="primary_light">@color/primary</color>
+    <color name="accent">@color/primary</color>
     <color name="accent_dark">#8C5C38</color>
     <color name="accent_light">#996A36</color>
     

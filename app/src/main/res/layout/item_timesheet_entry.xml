@@ -33,11 +33,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:textColor="@color/primary"
             android:textSize="14sp"
-            android:textColor="@color/accent_dark"
+            app:layout_constraintEnd_toStartOf="@+id/text_timesheet_clock_out"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_timesheet_date"
-            app:layout_constraintEnd_toStartOf="@+id/text_timesheet_clock_out"
             tools:text="In: 9:00 AM" />
 
         <TextView
@@ -45,11 +45,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:textColor="@color/primary"
             android:textSize="14sp"
-            android:textColor="@color/accent_dark"
+            app:layout_constraintEnd_toStartOf="@+id/text_timesheet_break"
             app:layout_constraintStart_toEndOf="@+id/text_timesheet_clock_in"
             app:layout_constraintTop_toBottomOf="@+id/text_timesheet_date"
-            app:layout_constraintEnd_toStartOf="@+id/text_timesheet_break"
             tools:text="Out: 5:00 PM" />
 
         <TextView
@@ -57,8 +57,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:textColor="@color/primary"
             android:textSize="14sp"
-            android:textColor="@color/accent_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_timesheet_date"
             tools:text="Break: 30 min" />
@@ -78,10 +78,11 @@
             android:id="@+id/button_edit_timesheet"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Edit time entry"
-            android:src="@android:drawable/ic_menu_edit"
+            android:src="@android:drawable/ic_menu_recent_history"
             android:tint="@color/accent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_timesheet_clock_out" />

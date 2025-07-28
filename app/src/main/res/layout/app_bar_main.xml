@@ -30,13 +30,13 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar"
-        android:contentDescription="@string/action_add_time_entry"
         android:backgroundTint="@color/accent"
-        app:tint="@color/primary"
+        android:contentDescription="@string/action_add_time_entry"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
         app:fabSize="normal"
         app:maxImageSize="24dp"
-        app:borderWidth="0dp"
-        app:elevation="6dp" />
+        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+        app:tint="@color/dark_background" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
