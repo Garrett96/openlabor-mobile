@@ -31,14 +31,16 @@ import java.time.format.DateTimeFormatter
  */
 class TimesheetDialog : DialogFragment() {
     
-    private lateinit var employeeNameInput: EditText
-    private lateinit var employeeTypeSpinner: Spinner
-    private lateinit var dateButton: Button
-    private lateinit var startTimeButton: Button
-    private lateinit var endTimeButton: Button
-    private lateinit var breakSeekBar: SeekBar
-    private lateinit var breakMinutesText: TextView
+    // UI components
+    private var employeeNameInput: EditText? = null
+    private var employeeTypeSpinner: Spinner? = null
+    private var dateButton: Button? = null
+    private var startTimeButton: Button? = null
+    private var endTimeButton: Button? = null
+    private var breakSeekBar: SeekBar? = null
+    private var breakMinutesText: TextView? = null
     
+    // Data
     private var selectedDate = LocalDate.now()
     private var selectedStartTime = LocalTime.of(9, 0) // Default to 9:00 AM
     private var selectedEndTime = LocalTime.of(17, 0) // Default to 5:00 PM
@@ -60,20 +62,21 @@ class TimesheetDialog : DialogFragment() {
         ): TimesheetDialog {
             return TimesheetDialog().apply {
                 arguments = Bundle().apply {
-                    employee?.let { putSerializable(ARG_EMPLOYEE, it) }
-                    timeEntry?.let { putSerializable(ARG_TIME_ENTRY, it) }
+                    employee?.let { 
+                        putSerializable(ARG_EMPLOYEE, it) 
+                    }
+                    timeEntry?.let { 
+                        putSerializable(ARG_TIME_ENTRY, it) 
+                    }
                 }
             }
-        }
-
-        private fun putSerializable(argTimeEntry: String, it: TimeEntry) {
-
         }
     }
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
+        // Extract arguments
         arguments?.let { args ->
             @Suppress("DEPRECATION")
             employee = args.getSerializable(ARG_EMPLOYEE) as? Employee
@@ -156,16 +159,18 @@ class TimesheetDialog : DialogFragment() {
         }
         dialogLayout.addView(dateLabel)
         
+        // IMPORTANT: Create the formatted text before initializing the button
+        // This avoids calling methods on uninitialized properties
+        val formattedDate = formatDate(selectedDate)
         dateButton = Button(context).apply {
             background = ContextCompat.getDrawable(context, R.drawable.btn_outline)
             setTextColor(ContextCompat.getColor(context, R.color.accent))
-            text = formatDate(selectedDate) // Set text directly without calling updateDateButtonText
+            text = formattedDate
             
             setOnClickListener {
                 showDatePicker()
             }
         }
-        // Ensure dateButton is initialized with proper text
         dialogLayout.addView(dateButton)
         
         // Time selectors
@@ -182,13 +187,15 @@ class TimesheetDialog : DialogFragment() {
             weightSum = 2f
         }
         
+        // IMPORTANT: Initialize with direct strings
+        val startTimeFormatted = formatTime("Start", selectedStartTime)
         startTimeButton = Button(context).apply {
             background = ContextCompat.getDrawable(context, R.drawable.btn_outline)
             setTextColor(ContextCompat.getColor(context, R.color.accent))
             layoutParams = LinearLayout.LayoutParams(
                 0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f
             ).apply { marginEnd = 8 }
-            text = formatTime("Start", selectedStartTime)
+            text = startTimeFormatted
             
             setOnClickListener {
                 showStartTimePicker()
@@ -196,13 +203,15 @@ class TimesheetDialog : DialogFragment() {
         }
         timeButtonsLayout.addView(startTimeButton)
         
+        // IMPORTANT: Initialize with direct strings
+        val endTimeFormatted = formatTime("End", selectedEndTime)
         endTimeButton = Button(context).apply {
             background = ContextCompat.getDrawable(context, R.drawable.btn_outline)
             setTextColor(ContextCompat.getColor(context, R.color.accent))
             layoutParams = LinearLayout.LayoutParams(
                 0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f
             ).apply { marginStart = 8 }
-            text = formatTime("End", selectedEndTime)
+            text = endTimeFormatted
             
             setOnClickListener {
                 showEndTimePicker()
@@ -236,7 +245,8 @@ class TimesheetDialog : DialogFragment() {
             setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                     selectedBreakMinutes = progress
-                    breakMinutesText.text = "$selectedBreakMinutes minutes"
+                    // Safely update text with null check
+                    breakMinutesText?.let { it.text = "$selectedBreakMinutes minutes" }
                 }
                 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -257,12 +267,17 @@ class TimesheetDialog : DialogFragment() {
     }
     
     private fun showDatePicker() {
+        // Safely store a reference to the button before using it in the callback
+        val button = dateButton ?: return
+        
         DatePickerDialog(
             requireContext(),
             { _, year, month, dayOfMonth ->
                 selectedDate = LocalDate.of(year, month + 1, dayOfMonth)
-                if (::dateButton.isInitialized) {
-                    dateButton.text = formatDate(selectedDate)
+                try {
+                    button.text = formatDate(selectedDate)
+                } catch (e: Exception) {
+                    // Silent catch to prevent crashes if the dialog was dismissed
                 }
             },
             selectedDate.year,
@@ -272,11 +287,17 @@ class TimesheetDialog : DialogFragment() {
     }
     
     private fun showStartTimePicker() {
+        val button = startTimeButton ?: return
+        
         TimePickerDialog(
             requireContext(),
             { _, hourOfDay, minute ->
                 selectedStartTime = LocalTime.of(hourOfDay, minute)
-                updateStartTimeButtonText()
+                try {
+                    button.text = formatTime("Start", selectedStartTime)
+                } catch (e: Exception) {
+                    // Silent catch to prevent crashes if the dialog was dismissed
+                }
             },
             selectedStartTime.hour,
             selectedStartTime.minute,
@@ -285,11 +306,17 @@ class TimesheetDialog : DialogFragment() {
     }
     
     private fun showEndTimePicker() {
+        val button = endTimeButton ?: return
+        
         TimePickerDialog(
             requireContext(),
             { _, hourOfDay, minute ->
                 selectedEndTime = LocalTime.of(hourOfDay, minute)
-                updateEndTimeButtonText()
+                try {
+                    button.text = formatTime("End", selectedEndTime)
+                } catch (e: Exception) {
+                    // Silent catch to prevent crashes if the dialog was dismissed
+                }
             },
             selectedEndTime.hour,
             selectedEndTime.minute,
@@ -301,37 +328,22 @@ class TimesheetDialog : DialogFragment() {
         val formatter = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy")
         return date.format(formatter)
     }
-
-    private fun updateDateButtonText() {
-        if (::dateButton.isInitialized) {
-            dateButton.text = formatDate(selectedDate)
-        }
-    }
     
     private fun formatTime(prefix: String, time: LocalTime): String {
         val formatter = DateTimeFormatter.ofPattern("h:mm a")
         return "$prefix: ${time.format(formatter)}"
     }
     
-    private fun updateStartTimeButtonText() {
-        if (::startTimeButton.isInitialized) {
-            startTimeButton.text = formatTime("Start", selectedStartTime)
-        }
-    }
-    
-    private fun updateEndTimeButtonText() {
-        if (::endTimeButton.isInitialized) {
-            endTimeButton.text = formatTime("End", selectedEndTime)
-        }
-    }
-    
     private fun saveTimeEntry() {
-        val employeeName = employeeNameInput.text.toString().trim()
+        val nameInput = employeeNameInput ?: return
+        val typeSpinner = employeeTypeSpinner ?: return
+        
+        val employeeName = nameInput.text.toString().trim()
         if (employeeName.isEmpty()) {
             return
         }
         
-        val employeeType = EmployeeType.values()[employeeTypeSpinner.selectedItemPosition]
+        val employeeType = EmployeeType.values()[typeSpinner.selectedItemPosition]
         
         val startDateTime = LocalDateTime.of(selectedDate, selectedStartTime)
         var endDateTime = LocalDateTime.of(selectedDate, selectedEndTime)
