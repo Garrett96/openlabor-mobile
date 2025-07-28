@@ -13,7 +13,7 @@ echo "Step 1: Updating Gradle files..."
 cat > gradle/wrapper/gradle-wrapper.properties << 'EOL'
 distributionBase=GRADLE_USER_HOME
 distributionPath=wrapper/dists
-distributionUrl=https\://services.gradle.org/distributions/gradle-8.5-bin.zip
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.0-bin.zip
 zipStoreBase=GRADLE_USER_HOME
 zipStorePath=wrapper/dists
 EOL
@@ -22,7 +22,7 @@ echo "✅ Updated Gradle wrapper version"
 # Update Kotlin and Android Gradle Plugin versions
 cat > gradle/libs.versions.toml << 'EOL'
 [versions]
-agp = "8.1.0"
+agp = "8.0.0"
 gson = "2.10.1"
 kotlin = "1.8.10"
 coreKtx = "1.12.0"
@@ -142,11 +142,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
         freeCompilerArgs = listOf(
             "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
             "-opt-in=com.marosseleng.compose.material3.datetimepickers.date.ui.dialog.ExperimentalMaterial3DatePickerApi",
@@ -231,8 +231,6 @@ org.gradle.caching=true
 org.gradle.configureondemand=true
 # Jetpack Compose compiler option
 kotlin.incremental.useClasspathSnapshot=true
-# Set JDK home to ensure proper version is used
-org.gradle.java.home=/usr/lib/jvm/java-11-openjdk-amd64
 EOL
 echo "✅ Updated gradle.properties"
 
@@ -292,21 +290,6 @@ data class Employee(
             .sumOf { it.getHoursWorked().toDouble() }
             .toFloat()
     }
-
-    // Step 3: Fix lateinit property initialization in TimesheetDialog
-    echo "Step 3: Fixing TimesheetDialog.kt lateinit property issue..."
-
-    # Create the directory if it doesn't exist
-    mkdir -p app/src/main/java/com/labs/tempus/ui/dialogs
-
-    # Update TimesheetDialog.kt to fix the lateinit property issue
-    cat > app/src/main/java/com/labs/tempus/ui/dialogs/TimesheetDialog.kt << 'EOL'
-    # This file will be updated in the actual fix script
-    # Add a check to ensure the dateButton is initialized before using it
-    EOL
-    echo "✅ Fixed lateinit property in TimesheetDialog.kt"
-
-    echo "✅ Android fixes complete!"
     
     /**
      * Checks if the employee is currently clocked in
