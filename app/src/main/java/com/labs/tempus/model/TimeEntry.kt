@@ -3,7 +3,6 @@ package com.labs.tempus.model
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import java.io.Serializable
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.LocalDate
@@ -26,7 +25,7 @@ data class TimeEntry(
     
     @SerializedName("breakMinutes")
     var breakMinutes: Int = 0
-) : Parcelable, Serializable {
+) : Parcelable {
     
     companion object {
         val TIME_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("h:mm a")
