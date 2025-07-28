@@ -39,7 +39,7 @@ class TimeEntryDialogFragment : DialogFragment() {
     private var selectedClockInTime = LocalTime.of(9, 0) // Default to 9:00 AM
     private var selectedClockOutTime = LocalTime.of(17, 0) // Default to 5:00 PM
     private var selectedBreakMinutes = 30 // Default 30 minute break
-    private var isNightShift = false
+    // Night shift is automatically determined based on clock times
     
     private var timeEntry: TimeEntry? = null
     private var employeeId: String? = null
@@ -88,8 +88,7 @@ class TimeEntryDialogFragment : DialogFragment() {
                 selectedClockOutDate = clockOut.toLocalDate()
                 selectedClockOutTime = clockOut.toLocalTime()
                 
-                // Check if this is a night shift (spans across days)
-                isNightShift = !selectedClockInDate.isEqual(selectedClockOutDate)
+                // Note: Night shift is automatically determined when needed
             } ?: run {
                 selectedClockOutDate = selectedClockInDate
                 selectedClockOutTime = LocalTime.of(17, 0)
@@ -115,35 +114,13 @@ class TimeEntryDialogFragment : DialogFragment() {
         }
         layout.addView(datePickerButton)
         
-        // Clock-out date picker button (for night shifts)
+        // Clock-out date picker button (always visible now that we auto-detect night shifts)
         val clockOutDateButton = Button(context).apply {
             text = "Select Clock-Out Date"
             id = View.generateViewId()
-            visibility = if (isNightShift) View.VISIBLE else View.GONE
             setOnClickListener { showClockOutDatePicker() }
         }
         layout.addView(clockOutDateButton)
-        
-        // Night shift toggle
-        val nightShiftButton = Button(context).apply {
-            text = if (isNightShift) "Night Shift: ON" else "Night Shift: OFF"
-            setOnClickListener {
-                isNightShift = !isNightShift
-                text = if (isNightShift) "Night Shift: ON" else "Night Shift: OFF"
-                clockOutDateButton.visibility = if (isNightShift) View.VISIBLE else View.GONE
-                
-                // If turning night shift on, default to next day for clock-out
-                if (isNightShift && selectedClockOutDate.isEqual(selectedClockInDate)) {
-                    selectedClockOutDate = selectedClockInDate.plusDays(1)
-                } else if (!isNightShift) {
-                    // If turning night shift off, make clock-out date same as clock-in date
-                    selectedClockOutDate = selectedClockInDate
-                }
-                
-                updateClockOutButtonText()
-            }
-        }
-        layout.addView(nightShiftButton)
         
         // Clock in button
         clockInButton = Button(context).apply {
@@ -228,13 +205,11 @@ class TimeEntryDialogFragment : DialogFragment() {
                 selectedClockInDate = LocalDate.of(year, month + 1, dayOfMonth)
                 updateClockInDateButtonText()
                 
-                // If not a night shift, keep clock-out date in sync with clock-in date
-                if (!isNightShift) {
+                // By default, keep the same date for clock-out
+                // User can change it manually if needed (for overnight shifts)
+                if (selectedClockOutDate.isBefore(selectedClockInDate)) {
+                    // If clock-out date is before clock-in date, adjust it
                     selectedClockOutDate = selectedClockInDate
-                    updateClockOutButtonText()
-                } else if (selectedClockOutDate.isBefore(selectedClockInDate)) {
-                    // If night shift and clock-out date is before clock-in date, adjust it
-                    selectedClockOutDate = selectedClockInDate.plusDays(1)
                     updateClockOutButtonText()
                 }
             },
@@ -298,24 +273,28 @@ class TimeEntryDialogFragment : DialogFragment() {
             { _, hourOfDay, minute ->
                 val newTime = LocalTime.of(hourOfDay, minute)
                 
-                // For night shifts or different days, any time is valid
-                if (isNightShift || !selectedClockInDate.isEqual(selectedClockOutDate)) {
+                // Detect potential night shift automatically
+                if (!selectedClockInDate.isEqual(selectedClockOutDate)) {
+                    // Different days, any time is valid
+                    selectedClockOutTime = newTime
+                    updateClockOutButtonText()
+                } else if (newTime.isAfter(selectedClockInTime)) {
+                    // Same day, but clock-out is after clock-in (normal case)
                     selectedClockOutTime = newTime
                     updateClockOutButtonText()
                 } else {
-                    // Same day: only allow clock-out time to be after clock-in time
-                    if (newTime.isAfter(selectedClockInTime)) {
-                        selectedClockOutTime = newTime
-                        updateClockOutButtonText()
-                    } else {
-                        // Show error message or handle invalid time
-                        val alertDialog = AlertDialog.Builder(requireContext())
-                            .setTitle("Invalid Time")
-                            .setMessage("Clock-out time must be after clock-in time for same-day shifts")
-                            .setPositiveButton("OK", null)
-                            .create()
-                        alertDialog.show()
-                    }
+                    // Same day, but clock-out is before clock-in - likely a night shift
+                    // Automatically move to the next day
+                    selectedClockOutDate = selectedClockInDate.plusDays(1)
+                    selectedClockOutTime = newTime
+                    updateClockOutButtonText()
+                    
+                    // Inform the user
+                    Toast.makeText(
+                        requireContext(),
+                        "Detected night shift: Clock-out date set to next day",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             },
             selectedClockOutTime.hour,
@@ -342,8 +321,8 @@ class TimeEntryDialogFragment : DialogFragment() {
         
         val timeText = selectedClockOutTime.format(timeFormatter)
         
-        // If night shift, include the date in the button text
-        clockOutButton.text = if (isNightShift || !selectedClockInDate.isEqual(selectedClockOutDate)) {
+        // Always include the date in the button text for clarity
+        clockOutButton.text = if (!selectedClockInDate.isEqual(selectedClockOutDate)) {
             "Clock Out: $timeText (${selectedClockOutDate.format(dateFormatter)})"
         } else {
             "Clock Out: $timeText"
