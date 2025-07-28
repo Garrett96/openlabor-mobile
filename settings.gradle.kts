@@ -16,7 +16,6 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { 
             url = uri("https://jitpack.io") 
-            credentials { username = "jp_7ipskua22mlngb8mfef0qoipk8" }
         }
         maven { url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev") }
     }
