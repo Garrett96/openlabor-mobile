@@ -224,7 +224,6 @@ class TimeEntryDialogFragment : DialogFragment() {
         
         DatePickerDialog(
             requireContext(), 
-            R.style.Theme_Tempus_Dialog_DatePicker,
             { _, year, month, dayOfMonth ->
                 selectedClockInDate = LocalDate.of(year, month + 1, dayOfMonth)
                 updateClockInDateButtonText()
@@ -251,7 +250,6 @@ class TimeEntryDialogFragment : DialogFragment() {
         
         DatePickerDialog(
             requireContext(),
-            R.style.Theme_Tempus_Dialog_DatePicker,
             { _, year, month, dayOfMonth ->
                 val newDate = LocalDate.of(year, month + 1, dayOfMonth)
                 
@@ -261,7 +259,7 @@ class TimeEntryDialogFragment : DialogFragment() {
                     updateClockOutButtonText()
                 } else {
                     // Show error message
-                    val alertDialog = AlertDialog.Builder(requireContext(), R.style.Theme_Tempus_AlertDialog)
+                    val alertDialog = AlertDialog.Builder(requireContext())
                             .setTitle("Invalid Date")
                             .setMessage("Clock-out date cannot be before clock-in date")
                             .setPositiveButton("OK", null)
@@ -278,7 +276,6 @@ class TimeEntryDialogFragment : DialogFragment() {
     private fun showClockInTimePicker() {
         TimePickerDialog(
             requireContext(),
-            R.style.Theme_Tempus_Dialog_TimePicker,
             { _, hourOfDay, minute ->
                 selectedClockInTime = LocalTime.of(hourOfDay, minute)
                 updateClockInButtonText()
@@ -298,7 +295,6 @@ class TimeEntryDialogFragment : DialogFragment() {
     private fun showClockOutTimePicker() {
         TimePickerDialog(
             requireContext(),
-            R.style.Theme_Tempus_Dialog_TimePicker,
             { _, hourOfDay, minute ->
                 val newTime = LocalTime.of(hourOfDay, minute)
                 
@@ -313,7 +309,7 @@ class TimeEntryDialogFragment : DialogFragment() {
                         updateClockOutButtonText()
                     } else {
                         // Show error message or handle invalid time
-                        val alertDialog = AlertDialog.Builder(requireContext(), R.style.Theme_Tempus_AlertDialog)
+                        val alertDialog = AlertDialog.Builder(requireContext())
                             .setTitle("Invalid Time")
                             .setMessage("Clock-out time must be after clock-in time for same-day shifts")
                             .setPositiveButton("OK", null)

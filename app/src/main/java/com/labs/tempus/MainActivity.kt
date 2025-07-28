@@ -14,7 +14,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import com.labs.tempus.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.appBarMain.toolbar)
 
         // Set up FAB to add time entries
-        binding.appBarMain.fab.setOnClickListener { view ->
+        binding.appBarMain.fab.setOnClickListener { _ ->
             val repository = EmployeeRepository.getInstance(this)
             com.labs.tempus.util.AddTimeEntryHelper.showAddTimeEntryDialog(
                 this,
@@ -106,7 +105,7 @@ class MainActivity : AppCompatActivity() {
     }
     
     /**
-     * Sets custom themes for dialogs to ensure dark mode compatibility
+     * Sets custom themes for dialogs
      */
     private fun setupDialogThemes() {
         // Set theme for AlertDialog
@@ -120,8 +119,5 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             // Safely handle any reflection errors
         }
-    
-        // Set default night mode
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
     }
 }

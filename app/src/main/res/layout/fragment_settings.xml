@@ -51,13 +51,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/primary" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/switch_dark_mode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Dark Mode"
-                android:textColor="@color/primary" />
+            <!-- Dark mode switch removed - using single theme -->
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switch_break_default"

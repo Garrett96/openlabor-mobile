@@ -15,8 +15,6 @@ import com.labs.tempus.model.Employee
 import com.labs.tempus.model.TimeEntry
 
 class EmployeeAdapter(
-    private val onClockInClick: (Employee) -> Unit,
-    private val onClockOutClick: (Employee) -> Unit,
     private val onEditClick: (Employee) -> Unit,
     private val onDeleteClick: (Employee) -> Unit,
     private val onViewTimeEntriesClick: (Employee) -> Unit
@@ -38,8 +36,6 @@ class EmployeeAdapter(
         private val typeTextView: TextView = itemView.findViewById(R.id.text_employee_type)
         private val totalHoursTextView: TextView = itemView.findViewById(R.id.text_total_hours)
         private val moreButton: ImageButton = itemView.findViewById(R.id.button_more)
-        private val clockInButton: Button = itemView.findViewById(R.id.button_clock_in)
-        private val clockOutButton: Button = itemView.findViewById(R.id.button_clock_out)
         private val timeDetailsContainer: LinearLayout = itemView.findViewById(R.id.container_time_details)
         private val clockedInTextView: TextView = itemView.findViewById(R.id.text_clocked_in)
         private val clockedOutTextView: TextView = itemView.findViewById(R.id.text_clocked_out)
@@ -50,8 +46,6 @@ class EmployeeAdapter(
             totalHoursTextView.text = "Total Hours: ${String.format("%.2f", employee.getTotalHours())}"
 
             val isClockedIn = employee.isClockedIn()
-            clockInButton.isEnabled = !isClockedIn
-            clockOutButton.isEnabled = isClockedIn
 
             // Show current time entry details if clocked in
             if (isClockedIn) {
@@ -73,13 +67,6 @@ class EmployeeAdapter(
             }
 
             // Set up click listeners
-            clockInButton.setOnClickListener {
-                onClockInClick(employee)
-            }
-
-            clockOutButton.setOnClickListener {
-                onClockOutClick(employee)
-            }
 
             moreButton.setOnClickListener { 
                 showPopupMenu(it, employee)

@@ -10,8 +10,7 @@ import kotlinx.coroutines.launch
 
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
     
-    private val _isDarkMode = MutableLiveData<Boolean>()
-    val isDarkMode: LiveData<Boolean> = _isDarkMode
+    // Dark mode removed - using single theme
     
     private val _defaultBreakTimeEnabled = MutableLiveData<Boolean>()
     val defaultBreakTimeEnabled: LiveData<Boolean> = _defaultBreakTimeEnabled
@@ -40,7 +39,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     
     private fun loadSettings() {
         // In a real app, these would be loaded from SharedPreferences
-        _isDarkMode.value = false
+        // Dark mode option removed
         _defaultBreakTimeEnabled.value = true
         _defaultBreakTime.value = 30
         
@@ -52,7 +51,6 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     }
     
     fun saveSettings(
-        isDarkMode: Boolean,
         defaultBreakTimeEnabled: Boolean,
         defaultBreakTime: Int,
         staffEnabled: Boolean,
@@ -62,7 +60,6 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     ) {
         viewModelScope.launch {
             // In a real app, these would be saved to SharedPreferences
-            _isDarkMode.value = isDarkMode
             _defaultBreakTimeEnabled.value = defaultBreakTimeEnabled
             _defaultBreakTime.value = defaultBreakTime
             

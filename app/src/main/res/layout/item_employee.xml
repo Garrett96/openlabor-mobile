@@ -64,36 +64,7 @@
             app:srcCompat="@android:drawable/ic_menu_more"
             app:tint="@color/accent" />
 
-        <LinearLayout
-            android:id="@+id/container_time_actions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_total_hours">
-
-            <Button
-                android:id="@+id/button_clock_in"
-                style="@style/Button.Tempus.Outlined"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:text="@string/action_clock_in" />
-
-            <Button
-                android:id="@+id/button_clock_out"
-                style="@style/Button.Tempus.Outlined"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:text="@string/action_clock_out"
-                android:enabled="false" />
-
-        </LinearLayout>
+        <!-- Clock in/out buttons removed -->
 
         <LinearLayout
             android:id="@+id/container_time_details"
@@ -107,7 +78,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/container_time_actions">
+            app:layout_constraintTop_toBottomOf="@+id/text_total_hours">
 
             <TextView
                 android:id="@+id/text_clocked_in"

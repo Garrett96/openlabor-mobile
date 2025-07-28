@@ -87,12 +87,6 @@ class HomeFragment : Fragment() {
     
     private fun setupRecyclerView() {
         employeeAdapter = EmployeeAdapter(
-            onClockInClick = { employee ->
-                clockInEmployee(employee)
-            },
-            onClockOutClick = { employee ->
-                showClockOutDialog(employee)
-            },
             onEditClick = { employee ->
                 showEditEmployeeDialog(employee)
             },
@@ -223,49 +217,7 @@ class HomeFragment : Fragment() {
             .show()
     }
     
-    private fun clockInEmployee(employee: Employee) {
-        homeViewModel.clockIn(employee.id)
-    }
-    
-    private fun showClockOutDialog(employee: Employee) {
-        val context = requireContext()
-        val layout = LinearLayout(context).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(50, 30, 50, 30)
-        }
-        
-        // Break time seek bar
-        val breakMinutes = intArrayOf(30) // Default value, using array to make it mutable
-        
-        val breakTimeLabel = TextView(context).apply {
-            text = "Break time: ${breakMinutes[0]} minutes"
-        }
-        layout.addView(breakTimeLabel)
-        
-        val breakTimeSeekBar = SeekBar(context).apply {
-            max = 120 // Max 2 hours
-            progress = breakMinutes[0]
-            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    breakMinutes[0] = progress
-                    breakTimeLabel.text = "Break time: ${breakMinutes[0]} minutes"
-                }
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-            })
-        }
-        layout.addView(breakTimeSeekBar)
-        
-        // Create and show dialog
-        AlertDialog.Builder(context, R.style.Theme_Tempus_Dialog)
-            .setTitle(R.string.dialog_clock_out)
-            .setView(layout)
-            .setPositiveButton(R.string.action_clock_out) { _, _ ->
-                homeViewModel.clockOut(employee.id, breakMinutes[0])
-            }
-            .setNegativeButton(R.string.action_cancel, null)
-            .show()
-    }
+    // Clock in/out functionality removed
     
     /**
      * Shows a dialog with time entries for an employee

@@ -41,9 +41,7 @@ class SettingsFragment : Fragment() {
     }
     
     private fun setupObservers() {
-        settingsViewModel.isDarkMode.observe(viewLifecycleOwner) { isDarkMode ->
-            binding.switchDarkMode.isChecked = isDarkMode
-        }
+        // Dark mode removed - using single theme
         
         settingsViewModel.defaultBreakTimeEnabled.observe(viewLifecycleOwner) { enabled ->
             binding.switchBreakDefault.isChecked = enabled
@@ -84,7 +82,6 @@ class SettingsFragment : Fragment() {
     
     private fun saveSettings() {
         settingsViewModel.saveSettings(
-            isDarkMode = binding.switchDarkMode.isChecked,
             defaultBreakTimeEnabled = binding.switchBreakDefault.isChecked,
             defaultBreakTime = binding.sliderBreakTime.value.toInt(),
             staffEnabled = binding.checkboxStaff.isChecked,
