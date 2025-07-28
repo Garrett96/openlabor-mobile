@@ -1,17 +1,12 @@
 package com.labs.tempus.model
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
 import java.io.Serializable
-import java.time.LocalDate
 import java.util.UUID
 
 /**
  * Data class representing an employee in the timesheet tracker
  */
-@Parcelize
 data class Employee(
     @SerializedName("id")
     val id: String = UUID.randomUUID().toString(),
@@ -23,8 +18,8 @@ data class Employee(
     var type: EmployeeType = EmployeeType.STAFF,
     
     @SerializedName("timeEntries")
-    val timeEntries: @RawValue MutableList<TimeEntry> = mutableListOf()
-) : Parcelable, Serializable {
+    val timeEntries: MutableList<TimeEntry> = mutableListOf()
+) : Serializable {
     
     /**
      * Calculate total hours worked for this employee
@@ -39,7 +34,7 @@ data class Employee(
      * @return Hours worked today
      */
     fun getTodayHours(): Float {
-        val today = LocalDate.now()
+        val today = java.time.LocalDate.now()
         return timeEntries
             .filter { 
                 val entryDate = it.clockInTime.toLocalDate()
@@ -79,8 +74,7 @@ data class Employee(
 /**
  * Enum representing different employee types
  */
-@Parcelize
-enum class EmployeeType : Parcelable {
+enum class EmployeeType : Serializable {
     STAFF,
     TEMP,
     CONTRACTOR,

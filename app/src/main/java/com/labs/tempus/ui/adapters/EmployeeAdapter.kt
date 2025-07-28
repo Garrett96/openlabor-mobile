@@ -15,10 +15,11 @@ import com.labs.tempus.model.Employee
 import com.labs.tempus.model.TimeEntry
 
 class EmployeeAdapter(
+    private val onClockInClick: (Employee) -> Unit,
+    private val onClockOutClick: (Employee) -> Unit,
     private val onEditClick: (Employee) -> Unit,
     private val onDeleteClick: (Employee) -> Unit,
-    private val onViewTimeEntriesClick: (Employee) -> Unit,
-    private val onAddTimeEntryClick: (Employee) -> Unit
+    private val onViewTimeEntriesClick: (Employee) -> Unit
 ) : ListAdapter<Employee, EmployeeAdapter.EmployeeViewHolder>(EmployeeDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeViewHolder {
@@ -37,25 +38,47 @@ class EmployeeAdapter(
         private val typeTextView: TextView = itemView.findViewById(R.id.text_employee_type)
         private val totalHoursTextView: TextView = itemView.findViewById(R.id.text_total_hours)
         private val moreButton: ImageButton = itemView.findViewById(R.id.button_more)
-        private val addEntryButton: Button = itemView.findViewById(R.id.button_add_entry)
+        private val clockInButton: Button = itemView.findViewById(R.id.button_clock_in)
+        private val clockOutButton: Button = itemView.findViewById(R.id.button_clock_out)
         private val timeDetailsContainer: LinearLayout = itemView.findViewById(R.id.container_time_details)
+        private val clockedInTextView: TextView = itemView.findViewById(R.id.text_clocked_in)
+        private val clockedOutTextView: TextView = itemView.findViewById(R.id.text_clocked_out)
 
         fun bind(employee: Employee) {
             nameTextView.text = employee.name
             typeTextView.text = employee.type.toString()
             totalHoursTextView.text = "Total Hours: ${String.format("%.2f", employee.getTotalHours())}"
 
-            // Show last entry summary if available
-            val lastEntry = employee.timeEntries.lastOrNull()
-            if (lastEntry != null) {
+            val isClockedIn = employee.isClockedIn()
+            clockInButton.isEnabled = !isClockedIn
+            clockOutButton.isEnabled = isClockedIn
+
+            // Show current time entry details if clocked in
+            if (isClockedIn) {
                 timeDetailsContainer.visibility = View.VISIBLE
+                val currentEntry = employee.getCurrentTimeEntry()
+                clockedInTextView.text = "Clocked in: ${currentEntry?.getFormattedClockInTime()}"
+                clockedOutTextView.visibility = View.GONE
             } else {
-                timeDetailsContainer.visibility = View.GONE
+                // Show last time entry if available
+                val lastEntry = employee.timeEntries.lastOrNull()
+                if (lastEntry != null && lastEntry.clockOutTime != null) {
+                    timeDetailsContainer.visibility = View.VISIBLE
+                    clockedInTextView.text = "Last in: ${lastEntry.getFormattedClockInTime()}"
+                    clockedOutTextView.visibility = View.VISIBLE
+                    clockedOutTextView.text = "Last out: ${lastEntry.getFormattedClockOutTime()}"
+                } else {
+                    timeDetailsContainer.visibility = View.GONE
+                }
             }
 
             // Set up click listeners
-            addEntryButton.setOnClickListener {
-                onAddTimeEntryClick(employee)
+            clockInButton.setOnClickListener {
+                onClockInClick(employee)
+            }
+
+            clockOutButton.setOnClickListener {
+                onClockOutClick(employee)
             }
 
             moreButton.setOnClickListener { 
@@ -65,23 +88,19 @@ class EmployeeAdapter(
         
         private fun showPopupMenu(view: View, employee: Employee) {
             val popup = android.widget.PopupMenu(view.context, view)
-            popup.menuInflater.inflate(R.menu.timesheet_actions, popup.menu)
+            popup.menuInflater.inflate(R.menu.employee_actions, popup.menu)
             
             popup.setOnMenuItemClickListener { menuItem ->
-                when (menuItem.title) {
-                    "View Timesheet Entries" -> {
+                when (menuItem.itemId) {
+                    R.id.action_view_entries -> {
                         onViewTimeEntriesClick(employee)
                         true
                     }
-                    "Add Timesheet Entry" -> {
-                        onAddTimeEntryClick(employee)
-                        true
-                    }
-                    "Edit Employee" -> {
+                    R.id.action_edit -> {
                         onEditClick(employee)
                         true
                     }
-                    "Delete Employee" -> {
+                    R.id.action_delete -> {
                         onDeleteClick(employee)
                         true
                     }

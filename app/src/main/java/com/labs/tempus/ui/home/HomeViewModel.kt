@@ -18,8 +18,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val _employees = MutableLiveData<List<Employee>>()
     val employees: LiveData<List<Employee>> = _employees
     
-    private val _operationResult = MutableLiveData<Boolean>()
-    val operationResult: LiveData<Boolean> = _operationResult
+    private val _clockInResult = MutableLiveData<Boolean>()
+    val clockInResult: LiveData<Boolean> = _clockInResult
+    
+    private val _clockOutResult = MutableLiveData<Boolean>()
+    val clockOutResult: LiveData<Boolean> = _clockOutResult
     
     init {
         loadEmployees()
@@ -50,28 +53,19 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
     
-    fun addTimeEntry(employeeId: String, timeEntry: TimeEntry) {
+    fun clockIn(employeeId: String) {
         viewModelScope.launch {
-            val employee = repository.getEmployeeById(employeeId)
-            if (employee != null) {
-                employee.timeEntries.add(timeEntry)
-                repository.updateEmployee(employee)
-                _operationResult.value = true
-                loadEmployees()
-            } else {
-                _operationResult.value = false
-            }
+            val result = repository.clockIn(employeeId)
+            _clockInResult.value = result != null
+            loadEmployees()
         }
     }
     
-    fun findOrCreateEmployee(name: String, type: EmployeeType): String {
-        val employee = repository.getAllEmployees().find { it.name.equals(name, ignoreCase = true) }
-        return if (employee != null) {
-            employee.id
-        } else {
-            val newEmployee = Employee(name = name, type = type)
-            repository.addEmployee(name, type)
-            newEmployee.id
+    fun clockOut(employeeId: String, breakMinutes: Int) {
+        viewModelScope.launch {
+            val result = repository.clockOut(employeeId, breakMinutes)
+            _clockOutResult.value = result != null
+            loadEmployees()
         }
     }
 }
