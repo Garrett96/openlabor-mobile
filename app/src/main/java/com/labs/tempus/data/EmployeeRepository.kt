@@ -87,6 +87,15 @@ class EmployeeRepository private constructor(context: Context) {
     }
     
     /**
+     * Add a new employee using an existing Employee object
+     */
+    fun addEmployee(employee: Employee): Employee {
+        employees.add(employee)
+        saveEmployees()
+        return employee
+    }
+    
+    /**
      * Update an employee
      */
     fun updateEmployee(employee: Employee) {

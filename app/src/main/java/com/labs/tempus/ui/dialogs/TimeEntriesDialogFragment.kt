@@ -47,6 +47,10 @@ class TimeEntriesDialogFragment : DialogFragment() {
                 }
             }
         }
+
+        private fun putSerializable(argEmployee: String, employee: Employee) {
+
+        }
     }
     
     override fun onCreate(savedInstanceState: Bundle?) {

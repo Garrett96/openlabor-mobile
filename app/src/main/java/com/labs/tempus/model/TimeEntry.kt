@@ -1,7 +1,8 @@
 package com.labs.tempus.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import kotlinx.parcelize.Parcelize
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.LocalDate
@@ -11,6 +12,7 @@ import java.util.UUID
 /**
  * Data class representing a time entry for an employee in the timesheet tracker
  */
+@Parcelize
 data class TimeEntry(
     @SerializedName("id")
     val id: String = UUID.randomUUID().toString(),
@@ -23,7 +25,7 @@ data class TimeEntry(
     
     @SerializedName("breakMinutes")
     var breakMinutes: Int = 0
-) : Serializable {
+) : Parcelable {
     
     companion object {
         val TIME_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("h:mm a")

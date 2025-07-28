@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.SeekBar
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -22,6 +21,8 @@ import com.labs.tempus.model.EmployeeType
 import com.labs.tempus.model.TimeEntry
 import com.labs.tempus.ui.adapters.EmployeeAdapter
 import com.labs.tempus.ui.adapters.TimeEntryAdapter
+import com.labs.tempus.ui.dialogs.TimeEntryDialogFragment
+import com.labs.tempus.ui.dialogs.compose.TimesheetComposeDialog
 import java.util.Timer
 import java.util.TimerTask
 
@@ -49,6 +50,9 @@ class HomeFragment : Fragment() {
         setupObservers()
         setupFab()
         startAutoRefresh()
+        
+        // Update the title to reflect the new purpose
+        binding.titleHome.text = "Timesheet Entries"
 
         return root
     }
@@ -61,7 +65,7 @@ class HomeFragment : Fragment() {
     }
     
     /**
-     * Starts a timer to refresh data every 2 seconds
+     * Starts a timer to refresh data every 5 seconds
      */
     private fun startAutoRefresh() {
         stopAutoRefresh() // Stop any existing timer
@@ -73,7 +77,7 @@ class HomeFragment : Fragment() {
                         refreshData()
                     }
                 }
-            }, 0, 2000) // Initial delay 0ms, then every 2000ms (2 seconds)
+            }, 0, 5000) // Initial delay 0ms, then every 5 seconds
         }
     }
     
@@ -87,12 +91,6 @@ class HomeFragment : Fragment() {
     
     private fun setupRecyclerView() {
         employeeAdapter = EmployeeAdapter(
-            onClockInClick = { employee ->
-                clockInEmployee(employee)
-            },
-            onClockOutClick = { employee ->
-                showClockOutDialog(employee)
-            },
             onEditClick = { employee ->
                 showEditEmployeeDialog(employee)
             },
@@ -101,6 +99,9 @@ class HomeFragment : Fragment() {
             },
             onViewTimeEntriesClick = { employee ->
                 showTimeEntriesDialog(employee)
+            },
+            onAddTimeEntryClick = { employee ->
+                showTimesheetDialog(employee)
             }
         )
         
@@ -121,7 +122,7 @@ class HomeFragment : Fragment() {
     
     private fun setupFab() {
         binding.fabAddEmployee.setOnClickListener {
-            showAddEmployeeDialog()
+            showTimesheetDialog()
         }
     }
     
@@ -223,48 +224,66 @@ class HomeFragment : Fragment() {
             .show()
     }
     
-    private fun clockInEmployee(employee: Employee) {
-        homeViewModel.clockIn(employee.id)
+    private fun showAddTimeEntryDialog(employee: Employee) {
+        val dialog = TimeEntryDialogFragment.newInstance(employee.id)
+        dialog.setOnSaveListener { clockInTime, clockOutTime, breakMinutes ->
+            val newTimeEntry = TimeEntry(
+                clockInTime = clockInTime,
+                clockOutTime = clockOutTime,
+                breakMinutes = breakMinutes
+            )
+            
+            // Add to employee's time entries
+            employee.timeEntries.add(newTimeEntry)
+            
+            // Update the employee in the repository
+            homeViewModel.updateEmployee(employee)
+        }
+        dialog.show(childFragmentManager, "AddTimeEntry")
     }
     
-    private fun showClockOutDialog(employee: Employee) {
-        val context = requireContext()
-        val layout = LinearLayout(context).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(50, 30, 50, 30)
-        }
+    private fun showTimesheetDialog(employee: Employee? = null) {
+        val dialog = TimesheetComposeDialog.newInstance(
+            employee = employee
+        )
         
-        // Break time seek bar
-        val breakMinutes = intArrayOf(30) // Default value, using array to make it mutable
-        
-        val breakTimeLabel = TextView(context).apply {
-            text = "Break time: ${breakMinutes[0]} minutes"
-        }
-        layout.addView(breakTimeLabel)
-        
-        val breakTimeSeekBar = SeekBar(context).apply {
-            max = 120 // Max 2 hours
-            progress = breakMinutes[0]
-            setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    breakMinutes[0] = progress
-                    breakTimeLabel.text = "Break time: ${breakMinutes[0]} minutes"
-                }
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-            })
-        }
-        layout.addView(breakTimeSeekBar)
-        
-        // Create and show dialog
-        AlertDialog.Builder(context, R.style.Theme_Tempus_Dialog)
-            .setTitle(R.string.dialog_clock_out)
-            .setView(layout)
-            .setPositiveButton(R.string.action_clock_out) { _, _ ->
-                homeViewModel.clockOut(employee.id, breakMinutes[0])
+        dialog.setOnSaveListener { employeeName, employeeType, startTime, endTime, breakMinutes ->
+            // Get or create employee
+            val employeeId = if (employee != null) {
+                employee.id
+            } else {
+                homeViewModel.findOrCreateEmployee(employeeName, employeeType)
             }
-            .setNegativeButton(R.string.action_cancel, null)
-            .show()
+            
+            // Create new time entry
+            val newTimeEntry = TimeEntry(
+                clockInTime = startTime,
+                clockOutTime = endTime,
+                breakMinutes = breakMinutes
+            )
+            
+            // Find the employee in the list
+            val targetEmployee = homeViewModel.employees.value?.find { it.id == employeeId }
+            
+            if (targetEmployee != null) {
+                // Add time entry to employee
+                targetEmployee.timeEntries.add(newTimeEntry)
+                homeViewModel.updateEmployee(targetEmployee)
+            } else {
+                // Create new employee with time entry
+                val newEmployee = Employee(
+                    name = employeeName,
+                    type = employeeType,
+                    timeEntries = mutableListOf(newTimeEntry)
+                )
+                homeViewModel.updateEmployee(newEmployee)
+            }
+            
+            // Refresh data
+            refreshData()
+        }
+        
+        dialog.show(childFragmentManager, "TimesheetEntry")
     }
     
     /**
@@ -274,6 +293,8 @@ class HomeFragment : Fragment() {
         val dialog = com.labs.tempus.ui.dialogs.TimeEntriesDialogFragment.newInstance(employee)
         dialog.show(childFragmentManager, "TimeEntriesDialog")
     }
+    
+
     
     override fun onDestroyView() {
         stopAutoRefresh()

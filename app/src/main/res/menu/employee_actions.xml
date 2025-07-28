@@ -2,7 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_view_entries"
-        android:title="View Time Entries" />
+        android:title="View Timesheet Entries" />
+    <item
+        android:id="@+id/action_add_time_entry"
+        android:title="Add Timesheet Entry" />
     <item
         android:id="@+id/action_edit"
         android:title="@string/action_edit" />

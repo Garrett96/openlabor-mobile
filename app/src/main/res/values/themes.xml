@@ -1,19 +1,38 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Tempus" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">@color/primary_dark</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/accent</item>
-        <item name="colorSecondaryVariant">@color/accent_dark</item>
-        <item name="colorOnSecondary">@color/black</item>
+    <style name="Theme.Tempus" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Material 3 colors -->
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_onTertiaryContainer</item>
+        <item name="colorError">@color/md_theme_error</item>
+        <item name="colorErrorContainer">@color/md_theme_errorContainer</item>
+        <item name="colorOnError">@color/md_theme_onError</item>
+        <item name="colorOnErrorContainer">@color/md_theme_onErrorContainer</item>
+        <item name="android:colorBackground">@color/md_theme_background</item>
+        <item name="colorOnBackground">@color/md_theme_onBackground</item>
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_outline</item>
+        <item name="colorOutlineVariant">@color/md_theme_outlineVariant</item>
+        <item name="colorSurfaceInverse">@color/md_theme_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_inverseOnSurface</item>
+        <item name="colorPrimaryInverse">@color/md_theme_inversePrimary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@color/white</item>
-        <item name="cardBackgroundColor">@color/white</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
     <style name="Theme.Tempus.NoActionBar">
@@ -21,39 +40,68 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Tempus.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">@color/primary_dark</item>
-        <item name="cardBackgroundColor">@color/white</item>
-    </style>
+    <style name="Theme.Tempus.AppBarOverlay" parent="ThemeOverlay.Material3.Dark.ActionBar" />
 
-    <style name="Theme.Tempus.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.Tempus.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
     
     <!-- Dialog theme -->
-    <style name="Theme.Tempus.Dialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorSecondary">@color/accent</item>
-        <item name="android:background">?attr/cardBackgroundColor</item>
-        <item name="android:textColorPrimary">@color/primary</item>
+    <style name="Theme.Tempus.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Tempus.MediumComponent</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.Tempus.Title.Text</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.Tempus.Body.Text</item>
         <item name="buttonBarPositiveButtonStyle">@style/Widget.Tempus.Button.Dialog</item>
         <item name="buttonBarNegativeButtonStyle">@style/Widget.Tempus.Button.Dialog.Negative</item>
     </style>
     
+    <style name="MaterialAlertDialog.Tempus.Title.Text" parent="MaterialAlertDialog.Material3.Title.Text">
+        <item name="android:textAppearance">@style/TextAppearance.Tempus.TitleLarge</item>
+    </style>
+    
+    <style name="MaterialAlertDialog.Tempus.Body.Text" parent="MaterialAlertDialog.Material3.Body.Text">
+        <item name="android:textAppearance">@style/TextAppearance.Tempus.BodyMedium</item>
+    </style>
+    
+    <!-- Shape appearances -->
+    <style name="ShapeAppearance.Tempus.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+    
+    <style name="ShapeAppearance.Tempus.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+    
+    <style name="ShapeAppearance.Tempus.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+    
     <!-- Button styles -->
-    <style name="Widget.Tempus.Button" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/primary</item>
+    <style name="Widget.Tempus.Button" parent="Widget.Material3.Button">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Tempus.SmallComponent</item>
     </style>
     
-    <style name="Widget.Tempus.Button.Dialog" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">@color/primary</item>
+    <style name="Widget.Tempus.Button.Dialog" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textAppearance">@style/TextAppearance.Tempus.LabelLarge</item>
     </style>
     
-    <style name="Widget.Tempus.Button.Dialog.Negative" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">@color/primary_light</item>
+    <style name="Widget.Tempus.Button.Dialog.Negative" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textAppearance">@style/TextAppearance.Tempus.LabelLarge</item>
     </style>
     
-    <style name="Widget.Tempus.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="strokeColor">@color/primary</item>
-        <item name="android:textColor">@color/primary</item>
+    <style name="Widget.Tempus.Button.OutlinedButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Tempus.SmallComponent</item>
     </style>
+    
+    <!-- Text Appearances -->
+    <style name="TextAppearance.Tempus.TitleLarge" parent="TextAppearance.Material3.TitleLarge" />
+    <style name="TextAppearance.Tempus.TitleMedium" parent="TextAppearance.Material3.TitleMedium" />
+    <style name="TextAppearance.Tempus.TitleSmall" parent="TextAppearance.Material3.TitleSmall" />
+    <style name="TextAppearance.Tempus.BodyLarge" parent="TextAppearance.Material3.BodyLarge" />
+    <style name="TextAppearance.Tempus.BodyMedium" parent="TextAppearance.Material3.BodyMedium" />
+    <style name="TextAppearance.Tempus.BodySmall" parent="TextAppearance.Material3.BodySmall" />
+    <style name="TextAppearance.Tempus.LabelLarge" parent="TextAppearance.Material3.LabelLarge" />
+    <style name="TextAppearance.Tempus.LabelMedium" parent="TextAppearance.Material3.LabelMedium" />
+    <style name="TextAppearance.Tempus.LabelSmall" parent="TextAppearance.Material3.LabelSmall" />
 </resources>

@@ -1,11 +1,11 @@
 package com.labs.tempus.ui.dialogs
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
@@ -17,7 +17,6 @@ import com.labs.tempus.R
 import com.labs.tempus.data.EmployeeRepository
 import com.labs.tempus.model.TimeEntry
 import java.time.LocalDate
-import java.io.Serializable
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -33,7 +32,7 @@ class TimeEntryDialogFragment : DialogFragment() {
     private lateinit var clockOutButton: Button
     private lateinit var breakSeekBar: SeekBar
     private lateinit var breakMinutesText: TextView
-    
+
     private var selectedClockInDate = LocalDate.now()
     private var selectedClockOutDate = LocalDate.now()
     private var selectedClockInTime = LocalTime.of(9, 0) // Default to 9:00 AM
@@ -59,6 +58,10 @@ class TimeEntryDialogFragment : DialogFragment() {
                     timeEntry?.let { putSerializable(ARG_TIME_ENTRY, it) }
                 }
             }
+        }
+
+        private fun putSerializable(argTimeEntry: String, it: TimeEntry) {
+            TODO("Not yet implemented")
         }
     }
     
@@ -99,6 +102,7 @@ class TimeEntryDialogFragment : DialogFragment() {
         }
     }
     
+    @SuppressLint("SetTextI18n")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // Create custom dialog layout programmatically since we don't have the XML yet
         val context = requireContext()

@@ -75,23 +75,12 @@
             app:layout_constraintTop_toBottomOf="@+id/text_total_hours">
 
             <Button
-                android:id="@+id/button_clock_in"
+                android:id="@+id/button_add_entry"
                 style="@style/Button.Tempus.Outlined"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:text="@string/action_clock_in" />
-
-            <Button
-                android:id="@+id/button_clock_out"
-                style="@style/Button.Tempus.Outlined"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:text="@string/action_clock_out"
-                android:enabled="false" />
+                android:text="Add Time Entry" />
 
         </LinearLayout>
 
@@ -110,20 +99,12 @@
             app:layout_constraintTop_toBottomOf="@+id/container_time_actions">
 
             <TextView
-                android:id="@+id/text_clocked_in"
+                android:id="@+id/text_time_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="@color/accent"
-                tools:text="Clocked in: 9:00 AM" />
-
-            <TextView
-                android:id="@+id/text_clocked_out"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/accent"
-                tools:text="Clocked out: 5:00 PM" />
+                android:text="Click 'Add Time Entry' to manually add hours" />
 
         </LinearLayout>
 
