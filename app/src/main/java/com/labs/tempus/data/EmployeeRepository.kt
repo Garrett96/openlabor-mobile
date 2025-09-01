@@ -77,6 +77,13 @@ class EmployeeRepository private constructor(context: Context) {
     }
     
     /**
+     * Get employee by name
+     */
+    fun getEmployeeByName(name: String): Employee? {
+        return employees.find { it.name == name }
+    }
+    
+    /**
      * Add a new employee
      */
     fun addEmployee(name: String, type: EmployeeType): Employee {

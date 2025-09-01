@@ -11,6 +11,7 @@
     <string name="menu_home">Timesheets</string>
     <string name="menu_summary">Summary</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_qrcode">QR Codes</string>
     <string name="menu_actions">Actions</string>
     <string name="menu_reset">Reset All Data</string>
     
@@ -67,4 +68,25 @@
     <string name="label_time_entry_date">Date: %s</string>
     <string name="label_time_entry_hours">Hours: %s</string>
     <string name="label_clock_in_out">%s to %s</string>
+    
+    <!-- QR Code -->
+    <string name="qr_code_title">QR Code Generator</string>
+    <string name="qr_code_employee">Employee Info</string>
+    <string name="qr_code_time_entry">Time Entry</string>
+    <string name="qr_code_summary">Summary</string>
+    <string name="qr_code_select_employee">Select Employee:</string>
+    <string name="qr_code_select_type">QR Code Type:</string>
+    <string name="qr_code_select_time_entry">Select Time Entry:</string>
+    <string name="qr_code_no_employees">No employees found. Add employees first to generate QR codes.</string>
+    <string name="qr_code_generation_error">Could not generate QR code. Please check your selections.</string>
+    <string name="qr_code_description">This QR code can be scanned to access the selected information.</string>
+    
+    <!-- QR Scanner -->
+    <string name="scan_qr_instruction">Position the QR code within the frame to scan</string>
+    <string name="action_close">Close</string>
+    <string name="action_scan_again">Scan Again</string>
+    <string name="scan_success">Successfully scanned</string>
+    <string name="scan_error">Error scanning QR code</string>
+    <string name="scan_ready">Ready to scan</string>
+    <string name="scan_qr_code">Scan QR Code</string>
 </resources>

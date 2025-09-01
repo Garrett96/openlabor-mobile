@@ -22,4 +22,12 @@
     <color name="dark_surface">#F4F4FF</color>
     <color name="dark_text_primary">#838383</color>
     <color name="dark_text_secondary">#B3FFFFFF</color> <!-- 70% white -->
+    
+    <!-- ZXing QR scanner colors -->
+    <color name="zxing_custom_possible_result_points">#C0FFBD21</color> <!-- ZXing result points -->
+    <color name="zxing_custom_result_view">#B0000000</color> <!-- ZXing result view -->
+    <color name="zxing_custom_viewfinder_laser">#FF0000</color> <!-- Laser color -->
+    <color name="zxing_custom_viewfinder_mask">#60000000</color> <!-- Mask color -->
+    <color name="zxing_transparent">#00000000</color> <!-- Transparent -->
+    <color name="zxing_status_text">#FFFFFF</color> <!-- Status text color -->
 </resources>
