@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Tempus</string>
+    <string name="app_name">openlabor-mobile</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Tempus</string>
+    <string name="nav_header_title">openlabor-mobile</string>
     <string name="nav_header_subtitle">Multi-Person Hours Tracking</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
@@ -14,13 +14,13 @@
     <string name="menu_qrcode">QR Codes</string>
     <string name="menu_actions">Actions</string>
     <string name="menu_reset">Reset All Data</string>
-    
+
     <!-- Employee types -->
     <string name="type_staff">Staff</string>
     <string name="type_temp">Temporary</string>
     <string name="type_contractor">Contractor</string>
     <string name="type_manager">Manager</string>
-    
+
     <!-- Actions -->
     <string name="action_add_employee">Add Employee</string>
     <string name="action_clock_in">Clock In</string>
@@ -34,7 +34,7 @@
     <string name="action_edit_time_entry">Edit Time Entry</string>
     <string name="action_show_time_entries">Show Time Entries</string>
     <string name="action_hide_time_entries">Hide Time Entries</string>
-    
+
     <!-- Dialog messages -->
     <string name="dialog_add_employee">Add New Employee</string>
     <string name="dialog_edit_employee">Edit Employee</string>
@@ -44,7 +44,7 @@
     <string name="dialog_time_entries">Time Entries</string>
     <string name="dialog_add_time_entry">Add Time Entry</string>
     <string name="dialog_edit_time_entry">Edit Time Entry</string>
-    
+
     <!-- Labels -->
     <string name="label_name">Name</string>
     <string name="label_type">Employee Type</string>
@@ -68,7 +68,7 @@
     <string name="label_time_entry_date">Date: %s</string>
     <string name="label_time_entry_hours">Hours: %s</string>
     <string name="label_clock_in_out">%s to %s</string>
-    
+
     <!-- QR Code -->
     <string name="qr_code_title">QR Code Generator</string>
     <string name="qr_code_employee">Employee Info</string>
@@ -80,7 +80,7 @@
     <string name="qr_code_no_employees">No employees found. Add employees first to generate QR codes.</string>
     <string name="qr_code_generation_error">Could not generate QR code. Please check your selections.</string>
     <string name="qr_code_description">This QR code can be scanned to access the selected information.</string>
-    
+
     <!-- QR Scanner -->
     <string name="scan_qr_instruction">Position the QR code within the frame to scan</string>
     <string name="action_close">Close</string>

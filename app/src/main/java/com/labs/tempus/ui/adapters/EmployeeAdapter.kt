@@ -1,4 +1,4 @@
-package com.labs.tempus.ui.adapters
+package com.labs.openlabor-mobile.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +10,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.labs.tempus.R
-import com.labs.tempus.model.Employee
-import com.labs.tempus.model.TimeEntry
+import com.labs.openlabor-mobile.R
+import com.labs.openlabor-mobile.model.Employee
+import com.labs.openlabor-mobile.model.TimeEntry
 
 class EmployeeAdapter(
     private val onEditClick: (Employee) -> Unit,
@@ -68,15 +68,15 @@ class EmployeeAdapter(
 
             // Set up click listeners
 
-            moreButton.setOnClickListener { 
+            moreButton.setOnClickListener {
                 showPopupMenu(it, employee)
             }
         }
-        
+
         private fun showPopupMenu(view: View, employee: Employee) {
             val popup = android.widget.PopupMenu(view.context, view)
             popup.menuInflater.inflate(R.menu.employee_actions, popup.menu)
-            
+
             popup.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.action_view_entries -> {
@@ -94,7 +94,7 @@ class EmployeeAdapter(
                     else -> false
                 }
             }
-            
+
             popup.show()
         }
     }

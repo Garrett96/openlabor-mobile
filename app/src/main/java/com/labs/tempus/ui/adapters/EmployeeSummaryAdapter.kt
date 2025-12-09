@@ -1,4 +1,4 @@
-package com.labs.tempus.ui.adapters
+package com.labs.openlabor-mobile.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.labs.tempus.R
-import com.labs.tempus.model.Employee
-import com.labs.tempus.model.TimeEntry
-import com.labs.tempus.ui.dialogs.TimeEntryDialogFragment
+import com.labs.openlabor-mobile.R
+import com.labs.openlabor-mobile.model.Employee
+import com.labs.openlabor-mobile.model.TimeEntry
+import com.labs.openlabor-mobile.ui.dialogs.TimeEntryDialogFragment
 
 /**
  * Adapter for displaying employee summary information
@@ -38,27 +38,27 @@ class EmployeeSummaryAdapter(
         private val hoursTextView: TextView = itemView.findViewById(R.id.text_summary_hours)
         private val timeEntriesRecyclerView: RecyclerView = itemView.findViewById(R.id.recycler_time_entries)
         private val expandButton: ImageButton = itemView.findViewById(R.id.button_expand_entries)
-        
+
         private var isExpanded = false
         private var timesheetAdapter: TimesheetEntryAdapter? = null
         private var boundEmployee: Employee? = null
-        
+
         init {
             expandButton.setOnClickListener {
                 toggleExpansion()
             }
-            
+
             // Set up time entries recycler view
             timeEntriesRecyclerView.layoutManager = LinearLayoutManager(itemView.context)
             timeEntriesRecyclerView.visibility = View.GONE
         }
-        
+
         fun bind(employee: Employee) {
             boundEmployee = employee
             nameTextView.text = employee.name
             typeTextView.text = employee.type.toString()
             hoursTextView.text = String.format("%.2f hrs", employee.getTotalHours())
-            
+
             // Create timesheet adapter if needed
             if (timesheetAdapter == null) {
                 timesheetAdapter = TimesheetEntryAdapter { timeEntry ->
@@ -76,10 +76,10 @@ class EmployeeSummaryAdapter(
                                         clockOutTime = clockOutTime,
                                         breakMinutes = breakMinutes
                                     )
-                                    
+
                                     // Replace the old entry with the updated one
                                     emp.timeEntries[index] = updatedTimeEntry
-                                    
+
                                     // Refresh the timesheet view
                                     refreshTimeEntries()
                                 }
@@ -90,25 +90,25 @@ class EmployeeSummaryAdapter(
                 }
                 timeEntriesRecyclerView.adapter = timesheetAdapter
             }
-            
+
             // Reset expansion state
             isExpanded = false
             timeEntriesRecyclerView.visibility = View.GONE
             expandButton.setImageResource(android.R.drawable.arrow_down_float)
-            
+
             // Update the time entries
             refreshTimeEntries()
         }
-        
+
         private fun toggleExpansion() {
             isExpanded = !isExpanded
             timeEntriesRecyclerView.visibility = if (isExpanded) View.VISIBLE else View.GONE
             expandButton.setImageResource(
-                if (isExpanded) android.R.drawable.arrow_up_float 
+                if (isExpanded) android.R.drawable.arrow_up_float
                 else android.R.drawable.arrow_down_float
             )
         }
-        
+
         private fun refreshTimeEntries() {
             boundEmployee?.let { employee ->
                 timesheetAdapter?.submitList(employee.timeEntries.sortedByDescending { it.clockInTime })
@@ -122,8 +122,8 @@ class EmployeeSummaryAdapter(
         }
 
         override fun areContentsTheSame(oldItem: Employee, newItem: Employee): Boolean {
-            return oldItem.name == newItem.name && 
-                   oldItem.type == newItem.type && 
+            return oldItem.name == newItem.name &&
+                   oldItem.type == newItem.type &&
                    oldItem.getTotalHours() == newItem.getTotalHours()
         }
     }

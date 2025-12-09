@@ -1,4 +1,4 @@
-package com.labs.tempus.util
+package com.labs.openlabor-mobile.util
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -11,12 +11,12 @@ import com.google.zxing.qrcode.QRCodeWriter
 import com.google.zxing.EncodeHintType
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import java.util.EnumMap
-import com.labs.tempus.model.Employee
-import com.labs.tempus.model.TimeEntry
+import com.labs.openlabor-mobile.model.Employee
+import com.labs.openlabor-mobile.model.TimeEntry
 
 object QRCodeGenerator {
     private const val TAG = "QRCodeGenerator"
-    
+
 turn The generated QR code bitmap, or null if generation failed
      */
     fun generateQRCode(content: String, width: Int = 500, height: Int = 500): Bitmap? {
@@ -24,7 +24,7 @@ turn The generated QR code bitmap, or null if generation failed
             val barcodeEncoder = BarcodeEncoder()
             val hints = EnumMap<EncodeHintType, Any>(EncodeHintType::class.java)
             hints[EncodeHintType.MARGIN] = 1 // Smaller margin for better scan results
-            
+
             barcodeEncoder.encodeBitmap(content, BarcodeFormat.QR_CODE, width, height, hints)
         } catch (e: WriterException) {
             Log.e(TAG, "Error generating QR code: ${e.message}")
@@ -34,7 +34,7 @@ turn The generated QR code bitmap, or null if generation failed
             null
         }
     }
-    
+
     fun generateEmployeeQRCode(employee: Employee, width: Int = 500, height: Int = 500): Bitmap? {
         val content = """
             {
@@ -44,15 +44,15 @@ turn The generated QR code bitmap, or null if generation failed
                 "employeeType": "${employee.type}"
             }
         """.trimIndent()
-        
+
         return generateQRCode(content, width, height)
     }
-    
+
 
     fun generateTimeEntryQRCode(timeEntry: TimeEntry, employeeName: String, width: Int = 500, height: Int = 500): Bitmap? {
         val clockInStr = timeEntry.clockInTime.toString()
         val clockOutStr = timeEntry.clockOutTime?.toString() ?: ""
-        
+
         val content = """
             {
                 "type": "timeEntry",
@@ -64,10 +64,10 @@ turn The generated QR code bitmap, or null if generation failed
                 "hoursWorked": ${timeEntry.getHoursWorked()}
             }
         """.trimIndent()
-        
+
         return generateQRCode(content, width, height)
     }
-    
+
 
     fun generateSummaryQRCode(employee: Employee, width: Int = 500, height: Int = 500): Bitmap? {
         val content = """
@@ -80,7 +80,7 @@ turn The generated QR code bitmap, or null if generation failed
                 "entryCount": ${employee.timeEntries.size}
             }
         """.trimIndent()
-        
+
         return generateQRCode(content, width, height)
     }
 }

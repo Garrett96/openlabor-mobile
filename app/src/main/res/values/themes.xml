@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Tempus" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Theme.openlabor-mobile" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_dark</item>
@@ -16,43 +16,43 @@
         <item name="cardBackgroundColor">@color/white</item>
     </style>
 
-    <style name="Theme.Tempus.NoActionBar">
+    <style name="Theme.openlabor-mobile.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Tempus.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="Theme.openlabor-mobile.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="cardBackgroundColor">@color/white</item>
     </style>
 
-    <style name="Theme.Tempus.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-    
+    <style name="Theme.openlabor-mobile.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <!-- Dialog theme -->
-    <style name="Theme.Tempus.Dialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+    <style name="Theme.openlabor-mobile.Dialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorSecondary">@color/accent</item>
         <item name="android:background">?attr/cardBackgroundColor</item>
         <item name="android:textColorPrimary">@color/primary</item>
-        <item name="buttonBarPositiveButtonStyle">@style/Widget.Tempus.Button.Dialog</item>
-        <item name="buttonBarNegativeButtonStyle">@style/Widget.Tempus.Button.Dialog.Negative</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.openlabor-mobile.Button.Dialog</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.openlabor-mobile.Button.Dialog.Negative</item>
     </style>
-    
+
     <!-- Button styles -->
-    <style name="Widget.Tempus.Button" parent="Widget.MaterialComponents.Button">
+    <style name="Widget.openlabor-mobile.Button" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/primary</item>
     </style>
-    
-    <style name="Widget.Tempus.Button.Dialog" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+
+    <style name="Widget.openlabor-mobile.Button.Dialog" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/primary</item>
     </style>
-    
-    <style name="Widget.Tempus.Button.Dialog.Negative" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+
+    <style name="Widget.openlabor-mobile.Button.Dialog.Negative" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/primary_light</item>
     </style>
-    
-    <style name="Widget.Tempus.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+
+    <style name="Widget.openlabor-mobile.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="strokeColor">@color/primary</item>
         <item name="android:textColor">@color/primary</item>
     </style>

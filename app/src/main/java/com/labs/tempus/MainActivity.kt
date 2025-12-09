@@ -1,4 +1,4 @@
-package com.labs.tempus
+package com.labs.openlabor-mobile
 
 import android.os.Bundle
 import android.view.Menu
@@ -6,7 +6,7 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import com.google.android.material.navigation.NavigationView
-import com.labs.tempus.data.EmployeeRepository
+import com.labs.openlabor-mobile.data.EmployeeRepository
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -14,7 +14,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.labs.tempus.databinding.ActivityMainBinding
+import com.labs.openlabor-mobile.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,16 +33,16 @@ class MainActivity : AppCompatActivity() {
 
         binding.appBarMain.fab.setOnClickListener { _ ->
             val repository = EmployeeRepository.getInstance(this)
-            com.labs.tempus.util.AddTimeEntryHelper.showAddTimeEntryDialog(
+            com.labs.openlabor-mobile.util.AddTimeEntryHelper.showAddTimeEntryDialog(
                 this,
                 supportFragmentManager,
                 repository
             )
         }
-        
+
         binding.appBarMain.fab.setImageResource(android.R.drawable.ic_menu_my_calendar)
         binding.appBarMain.fab.contentDescription = "Add Time Entry"
-        
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
-    
+
     override fun onResume() {
         super.onResume()
         refreshData()
@@ -70,13 +70,13 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-    
+
 
     fun refreshData() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         val currentFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)
             ?.childFragmentManager?.fragments?.get(0)
-            
+
         when (navController.currentDestination?.id) {
             R.id.nav_home -> {
                 currentFragment?.let {
@@ -93,18 +93,18 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    
+
     }
 
     private fun setupDialogThemes() {
         try {
             AlertDialog.Builder::class.java.getDeclaredField("P").apply {
                 isAccessible = true
-                getInt(null) 
+                getInt(null)
 
             }
         } catch (e: Exception) {
-        
+
         }
     }
 }

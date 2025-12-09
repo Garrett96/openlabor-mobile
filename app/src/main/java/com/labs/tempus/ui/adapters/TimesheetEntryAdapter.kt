@@ -1,4 +1,4 @@
-package com.labs.tempus.ui.adapters
+package com.labs.openlabor-mobile.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.labs.tempus.R
-import com.labs.tempus.model.TimeEntry
+import com.labs.openlabor-mobile.R
+import com.labs.openlabor-mobile.model.TimeEntry
 
 /**
  * Adapter for displaying time entries in the timesheet/summary view
@@ -47,7 +47,7 @@ class TimesheetEntryAdapter(
             editButton.setOnClickListener {
                 currentTimeEntry?.let { onEditClick(it) }
             }
-            
+
             // Make the entire item clickable for editing
             itemView.setOnClickListener {
                 currentTimeEntry?.let { onEditClick(it) }
@@ -56,15 +56,15 @@ class TimesheetEntryAdapter(
 
         fun bind(timeEntry: TimeEntry) {
             currentTimeEntry = timeEntry
-            
+
             // Display date differently for night shifts that span multiple days
             dateTextView.text = timeEntry.getFormattedDate()
-            
+
             if (timeEntry.isNightShift()) {
                 // For night shifts that span multiple days, show the day of month to avoid confusion
                 val clockInDay = timeEntry.clockInTime.dayOfMonth
                 clockInTextView.text = "In: ${timeEntry.getFormattedClockInTime()} (${clockInDay})"
-                
+
                 if (timeEntry.clockOutTime != null) {
                     val clockOutDay = timeEntry.clockOutTime!!.dayOfMonth
                     clockOutTextView.text = "Out: ${timeEntry.getFormattedClockOutTime()} (${clockOutDay})"
@@ -74,14 +74,14 @@ class TimesheetEntryAdapter(
             } else {
                 // Regular shifts (same day)
                 clockInTextView.text = "In: ${timeEntry.getFormattedClockInTime()}"
-                
+
                 if (timeEntry.clockOutTime != null) {
                     clockOutTextView.text = "Out: ${timeEntry.getFormattedClockOutTime()}"
                 } else {
                     clockOutTextView.text = "Out: Not clocked out"
                 }
             }
-            
+
             breakTextView.text = "Break: ${timeEntry.breakMinutes} min"
             hoursTextView.text = timeEntry.getFormattedHours()
         }

@@ -1,4 +1,4 @@
-package com.labs.tempus.util
+package com.labs.openlabor-mobile.util
 
 import android.app.AlertDialog
 import android.content.Context
@@ -8,25 +8,25 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Spinner
 import androidx.fragment.app.FragmentManager
-import com.labs.tempus.R
-import com.labs.tempus.data.EmployeeRepository
-import com.labs.tempus.model.Employee
-import com.labs.tempus.model.EmployeeType
-import com.labs.tempus.ui.dialogs.TimeEntryDialogFragment
+import com.labs.openlabor-mobile.R
+import com.labs.openlabor-mobile.data.EmployeeRepository
+import com.labs.openlabor-mobile.model.Employee
+import com.labs.openlabor-mobile.model.EmployeeType
+import com.labs.openlabor-mobile.ui.dialogs.TimeEntryDialogFragment
 
 object AddTimeEntryHelper {
 
     fun showAddTimeEntryDialog(context: Context, fragmentManager: FragmentManager, repository: EmployeeRepository) {
         val employees = repository.getAllEmployees()
-        
+
         if (employees.isEmpty()) {
             showAddEmployeeDialog(context, fragmentManager, repository)
             return
         }
-        
+
         val employeeNames = employees.map { it.name }.toTypedArray()
-        
-        AlertDialog.Builder(context, R.style.Theme_Tempus_Dialog)
+
+        AlertDialog.Builder(context, R.style.Theme_openlabor-mobile_Dialog)
             .setTitle("Select Employee")
             .setItems(employeeNames) { _, which ->
                 val selectedEmployee = employees[which]
@@ -38,24 +38,24 @@ object AddTimeEntryHelper {
             .setNegativeButton("Cancel", null)
             .show()
     }
-    
+
     private fun showTimeEntryDialog(fragmentManager: FragmentManager, employee: Employee) {
         val dialog = TimeEntryDialogFragment.newInstance(employee.id)
         dialog.show(fragmentManager, "AddTimeEntry")
     }
-    
+
     private fun showAddEmployeeDialog(context: Context, fragmentManager: FragmentManager, repository: EmployeeRepository) {
         val layout = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(50, 30, 50, 30)
         }
-        
+
         val nameEditText = EditText(context).apply {
             hint = "Employee Name"
             inputType = InputType.TYPE_CLASS_TEXT
         }
         layout.addView(nameEditText)
-        
+
         val typeSpinner = Spinner(context)
         val typeAdapter = ArrayAdapter(
             context,
@@ -66,8 +66,8 @@ object AddTimeEntryHelper {
         }
         typeSpinner.adapter = typeAdapter
         layout.addView(typeSpinner)
-        
-        AlertDialog.Builder(context, R.style.Theme_Tempus_Dialog)
+
+        AlertDialog.Builder(context, R.style.Theme_openlabor-mobile_Dialog)
             .setTitle("Add Employee")
             .setView(layout)
             .setPositiveButton("Save") { _, _ ->
@@ -75,7 +75,7 @@ object AddTimeEntryHelper {
                 if (name.isNotEmpty()) {
                     val selectedType = EmployeeType.values()[typeSpinner.selectedItemPosition]
                     val newEmployee = repository.addEmployee(name, selectedType)
-                    
+
                     showTimeEntryDialog(fragmentManager, newEmployee)
                 }
             }

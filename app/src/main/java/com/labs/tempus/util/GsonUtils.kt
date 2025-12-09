@@ -1,4 +1,4 @@
-package com.labs.tempus.util
+package com.labs.openlabor-mobile.util
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -43,7 +43,7 @@ object GsonUtils {
             return LocalDateTime.parse(json.asString, formatter)
         }
     }
-    
+
     private class LocalDateTimeNullableDeserializer : JsonDeserializer<LocalDateTime?> {
         override fun deserialize(
             json: JsonElement?,

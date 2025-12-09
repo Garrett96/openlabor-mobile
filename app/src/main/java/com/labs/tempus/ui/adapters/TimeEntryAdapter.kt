@@ -1,4 +1,4 @@
-package com.labs.tempus.ui.adapters
+package com.labs.openlabor-mobile.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.labs.tempus.R
-import com.labs.tempus.model.TimeEntry
+import com.labs.openlabor-mobile.R
+import com.labs.openlabor-mobile.model.TimeEntry
 
 /**
  * Adapter for displaying time entries in a RecyclerView
@@ -42,10 +42,10 @@ class TimeEntryAdapter(
         fun bind(timeEntry: TimeEntry) {
             // Set date
             dateTextView.text = timeEntry.getFormattedDate()
-            
+
             // Set clock in time
             clockInTextView.text = "In: ${timeEntry.getFormattedClockInTime()}"
-            
+
             // Set clock out time if available
             if (timeEntry.clockOutTime != null) {
                 clockOutTextView.text = "Out: ${timeEntry.getFormattedClockOutTime()}"
@@ -54,18 +54,18 @@ class TimeEntryAdapter(
                 clockOutTextView.text = "Out: Not clocked out"
                 clockOutTextView.visibility = View.VISIBLE
             }
-            
+
             // Set break time
             breakTimeTextView.text = "Break: ${timeEntry.breakMinutes} min"
-            
+
             // Set hours worked
             hoursWorkedTextView.text = "Hours: ${String.format("%.2f", timeEntry.getHoursWorked())}"
-            
+
             // Set click listeners
             editButton.setOnClickListener {
                 onEditClick(timeEntry)
             }
-            
+
             deleteButton.setOnClickListener {
                 onDeleteClick(timeEntry)
             }

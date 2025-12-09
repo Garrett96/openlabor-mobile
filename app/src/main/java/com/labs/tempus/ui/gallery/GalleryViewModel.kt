@@ -1,4 +1,4 @@
-package com.labs.tempus.ui.gallery
+package com.labs.openlabor-mobile.ui.gallery
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

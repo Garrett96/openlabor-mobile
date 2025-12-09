@@ -1,4 +1,4 @@
-package com.labs.tempus
+package com.labs.openlabor-mobile
 
 import org.junit.Test
 

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.labs.tempus"
+    namespace = "com.labs.openlabor-mobile"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.labs.tempus"
+        applicationId = "com.labs.openlabor-mobile"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

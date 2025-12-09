@@ -9,7 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Tempus.AppBarOverlay"
+        android:theme="@style/Theme.openlabor-mobile.AppBarOverlay"
         android:background="@color/primary">
 
         <androidx.appcompat.widget.Toolbar
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/primary"
-            app:popupTheme="@style/Theme.Tempus.PopupOverlay" />
+            app:popupTheme="@style/Theme.openlabor-mobile.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

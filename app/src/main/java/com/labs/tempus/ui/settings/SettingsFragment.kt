@@ -1,4 +1,4 @@
-package com.labs.tempus.ui.settings
+package com.labs.openlabor-mobile.ui.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.slider.Slider
-import com.labs.tempus.databinding.FragmentSettingsBinding
+import com.labs.openlabor-mobile.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
-    
+
     private lateinit var settingsViewModel: SettingsViewModel
 
     override fun onCreateView(
@@ -39,47 +39,47 @@ class SettingsFragment : Fragment() {
             binding.textBreakTimeValue.text = "Default break time: $minutes minutes"
         }
     }
-    
+
     private fun setupObservers() {
         // Dark mode removed - using single theme
-        
+
         settingsViewModel.defaultBreakTimeEnabled.observe(viewLifecycleOwner) { enabled ->
             binding.switchBreakDefault.isChecked = enabled
             binding.sliderBreakTime.isEnabled = enabled
         }
-        
+
         settingsViewModel.defaultBreakTime.observe(viewLifecycleOwner) { breakTime ->
             binding.sliderBreakTime.value = breakTime.toFloat()
             binding.textBreakTimeValue.text = "Default break time: $breakTime minutes"
         }
-        
+
         settingsViewModel.staffEnabled.observe(viewLifecycleOwner) { enabled ->
             binding.checkboxStaff.isChecked = enabled
         }
-        
+
         settingsViewModel.tempEnabled.observe(viewLifecycleOwner) { enabled ->
             binding.checkboxTemp.isChecked = enabled
         }
-        
+
         settingsViewModel.contractorEnabled.observe(viewLifecycleOwner) { enabled ->
             binding.checkboxContractor.isChecked = enabled
         }
-        
+
         settingsViewModel.managerEnabled.observe(viewLifecycleOwner) { enabled ->
             binding.checkboxManager.isChecked = enabled
         }
     }
-    
+
     private fun setupListeners() {
         binding.switchBreakDefault.setOnCheckedChangeListener { _, isChecked ->
             binding.sliderBreakTime.isEnabled = isChecked
         }
-        
+
         binding.buttonSaveSettings.setOnClickListener {
             saveSettings()
         }
     }
-    
+
     private fun saveSettings() {
         settingsViewModel.saveSettings(
             defaultBreakTimeEnabled = binding.switchBreakDefault.isChecked,

@@ -1,4 +1,4 @@
-package com.labs.tempus.model
+package com.labs.openlabor-mobile.model
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -11,38 +11,38 @@ import java.util.UUID
 data class TimeEntry(
     @SerializedName("id")
     val id: String = UUID.randomUUID().toString(),
-    
+
     @SerializedName("clockInTime")
     var clockInTime: LocalDateTime = LocalDateTime.now(),
-    
+
     @SerializedName("clockOutTime")
     var clockOutTime: LocalDateTime? = null,
-    
+
     @SerializedName("breakMinutes")
     var breakMinutes: Int = 0
 ) : Serializable {
-    
+
     companion object {
         val TIME_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("h:mm a")
         val DATE_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy")
         val DATE_TIME_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy 'at' h:mm a")
     }
-    
+
     fun getHoursWorked(): Float {
         if (clockOutTime == null) {
             return 0f
         }
-        
+
         val totalMinutes = Duration.between(clockInTime, clockOutTime).toMinutes()
-        
+
         val adjustedMinutes = if (totalMinutes < 0) 0L else totalMinutes
         val workMinutes = adjustedMinutes - breakMinutes
-        
+
         return workMinutes / 60f
     }
 
     fun isNightShift(): Boolean {
-        return clockOutTime != null && 
+        return clockOutTime != null &&
                !clockInTime.toLocalDate().isEqual(clockOutTime!!.toLocalDate())
     }
 
@@ -62,7 +62,7 @@ data class TimeEntry(
         }
         return clockInTime.format(DATE_FORMATTER)
     }
-    
+
     fun getFormattedHours(): String {
         val hours = getHoursWorked()
         return if (isNightShift()) {
@@ -71,11 +71,11 @@ data class TimeEntry(
             String.format("%.2f hrs", hours)
         }
     }
-    
+
     fun getFormattedClockInDateTime(): String {
         return clockInTime.format(DATE_TIME_FORMATTER)
     }
-    
+
     fun getFormattedClockOutDateTime(): String {
         return clockOutTime?.format(DATE_TIME_FORMATTER) ?: ""
     }

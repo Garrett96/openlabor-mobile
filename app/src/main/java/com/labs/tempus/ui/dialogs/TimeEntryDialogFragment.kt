@@ -1,4 +1,4 @@
-package com.labs.tempus.ui.dialogs
+package com.labs.openlabor-mobile.ui.dialogs
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -13,9 +13,9 @@ import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.labs.tempus.R
-import com.labs.tempus.data.EmployeeRepository
-import com.labs.tempus.model.TimeEntry
+import com.labs.openlabor-mobile.R
+import com.labs.openlabor-mobile.data.EmployeeRepository
+import com.labs.openlabor-mobile.model.TimeEntry
 import java.time.LocalDate
 import java.io.Serializable
 import java.time.LocalDateTime
@@ -27,31 +27,31 @@ import java.util.Calendar
  * Dialog fragment for adding or editing a time entry
  */
 class TimeEntryDialogFragment : DialogFragment() {
-    
+
     private lateinit var datePickerButton: Button
     private lateinit var clockInButton: Button
     private lateinit var clockOutButton: Button
     private lateinit var breakSeekBar: SeekBar
     private lateinit var breakMinutesText: TextView
-    
+
     private var selectedClockInDate = LocalDate.now()
     private var selectedClockOutDate = LocalDate.now()
     private var selectedClockInTime = LocalTime.of(9, 0) // Default to 9:00 AM
     private var selectedClockOutTime = LocalTime.of(17, 0) // Default to 5:00 PM
     private var selectedBreakMinutes = 30 // Default 30 minute break
     // Night shift is automatically determined based on clock times
-    
+
     private var timeEntry: TimeEntry? = null
     private var employeeId: String? = null
     private var employeeName: String = ""
-    
+
     private var onSaveListener: ((LocalDateTime, LocalDateTime, Int) -> Unit)? = null
     private lateinit var employeeRepository: EmployeeRepository
-    
+
     companion object {
         private const val ARG_EMPLOYEE_ID = "employee_id"
         private const val ARG_TIME_ENTRY = "time_entry"
-        
+
         fun newInstance(employeeId: String, timeEntry: TimeEntry? = null): TimeEntryDialogFragment {
             return TimeEntryDialogFragment().apply {
                 arguments = Bundle().apply {
@@ -61,43 +61,43 @@ class TimeEntryDialogFragment : DialogFragment() {
             }
         }
     }
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         employeeId = arguments?.getString(ARG_EMPLOYEE_ID)
         @Suppress("DEPRECATION")
         timeEntry = arguments?.getSerializable(ARG_TIME_ENTRY) as? TimeEntry
-        
+
         // Initialize repository
         employeeRepository = EmployeeRepository.getInstance(requireContext())
-        
+
         // Get employee name
         employeeId?.let { id ->
             employeeRepository.getEmployeeById(id)?.let { employee ->
                 employeeName = employee.name
             }
         }
-        
+
         // If we're editing an existing time entry, initialize with its values
         timeEntry?.let {
             selectedClockInDate = it.clockInTime.toLocalDate()
             selectedClockInTime = it.clockInTime.toLocalTime()
-            
+
             it.clockOutTime?.let { clockOut ->
                 selectedClockOutDate = clockOut.toLocalDate()
                 selectedClockOutTime = clockOut.toLocalTime()
-                
+
                 // Note: Night shift is automatically determined when needed
             } ?: run {
                 selectedClockOutDate = selectedClockInDate
                 selectedClockOutTime = LocalTime.of(17, 0)
             }
-            
+
             selectedBreakMinutes = it.breakMinutes
         }
     }
-    
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // Create custom dialog layout programmatically since we don't have the XML yet
         val context = requireContext()
@@ -106,14 +106,14 @@ class TimeEntryDialogFragment : DialogFragment() {
             setPadding(50, 30, 50, 30)
             setBackgroundColor(resources.getColor(R.color.dark_card_background, context?.theme))
         }
-        
+
         // Clock-in date picker button
         datePickerButton = Button(context).apply {
             text = "Select Clock-In Date"
             id = View.generateViewId()
         }
         layout.addView(datePickerButton)
-        
+
         // Clock-out date picker button (always visible now that we auto-detect night shifts)
         val clockOutDateButton = Button(context).apply {
             text = "Select Clock-Out Date"
@@ -121,21 +121,21 @@ class TimeEntryDialogFragment : DialogFragment() {
             setOnClickListener { showClockOutDatePicker() }
         }
         layout.addView(clockOutDateButton)
-        
+
         // Clock in button
         clockInButton = Button(context).apply {
             text = "Clock In Time"
             id = View.generateViewId()
         }
         layout.addView(clockInButton)
-        
+
         // Clock out button
         clockOutButton = Button(context).apply {
-            text = "Clock Out Time" 
+            text = "Clock Out Time"
             id = View.generateViewId()
         }
         layout.addView(clockOutButton)
-        
+
         // Break minutes text
         breakMinutesText = TextView(context).apply {
             text = "Break: 30 minutes"
@@ -143,7 +143,7 @@ class TimeEntryDialogFragment : DialogFragment() {
             setPadding(0, 30, 0, 10)
         }
         layout.addView(breakMinutesText)
-        
+
         // Break seekbar
         breakSeekBar = SeekBar(context).apply {
             max = 120
@@ -151,16 +151,16 @@ class TimeEntryDialogFragment : DialogFragment() {
             id = View.generateViewId()
         }
         layout.addView(breakSeekBar)
-        
+
         // Setup initial values
         updateClockInDateButtonText()
         updateClockInButtonText()
         updateClockOutButtonText()
-        
+
         breakSeekBar.max = 120 // Max 2 hours of break
         breakSeekBar.progress = selectedBreakMinutes
         updateBreakMinutesText()
-        
+
         // Setup click listeners
         datePickerButton.setOnClickListener { showClockInDatePicker() }
         clockInButton.setOnClickListener { showClockInTimePicker() }
@@ -173,16 +173,16 @@ class TimeEntryDialogFragment : DialogFragment() {
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
-        
+
         // Create dialog
         val title = if (timeEntry == null) "Add Time Entry for $employeeName" else "Edit Time Entry for $employeeName"
-        return AlertDialog.Builder(requireContext(), R.style.Theme_Tempus_Dialog)
+        return AlertDialog.Builder(requireContext(), R.style.Theme_openlabor-mobile_Dialog)
             .setTitle(title)
             .setView(layout as View)
             .setPositiveButton("Save") { _, _ ->
                 val clockInDateTime = LocalDateTime.of(selectedClockInDate, selectedClockInTime)
                 val clockOutDateTime = LocalDateTime.of(selectedClockOutDate, selectedClockOutTime)
-                
+
                 if (onSaveListener != null) {
                     // Use the custom listener if provided
                     onSaveListener?.invoke(clockInDateTime, clockOutDateTime, selectedBreakMinutes)
@@ -194,17 +194,17 @@ class TimeEntryDialogFragment : DialogFragment() {
             .setNegativeButton("Cancel", null)
             .create()
     }
-    
+
     private fun showClockInDatePicker() {
         val calendar = Calendar.getInstance()
         calendar.set(selectedClockInDate.year, selectedClockInDate.monthValue - 1, selectedClockInDate.dayOfMonth)
-        
+
         DatePickerDialog(
-            requireContext(), 
+            requireContext(),
             { _, year, month, dayOfMonth ->
                 selectedClockInDate = LocalDate.of(year, month + 1, dayOfMonth)
                 updateClockInDateButtonText()
-                
+
                 // By default, keep the same date for clock-out
                 // User can change it manually if needed (for overnight shifts)
                 if (selectedClockOutDate.isBefore(selectedClockInDate)) {
@@ -218,16 +218,16 @@ class TimeEntryDialogFragment : DialogFragment() {
             calendar.get(Calendar.DAY_OF_MONTH)
         ).show()
     }
-    
+
     private fun showClockOutDatePicker() {
         val calendar = Calendar.getInstance()
         calendar.set(selectedClockOutDate.year, selectedClockOutDate.monthValue - 1, selectedClockOutDate.dayOfMonth)
-        
+
         DatePickerDialog(
             requireContext(),
             { _, year, month, dayOfMonth ->
                 val newDate = LocalDate.of(year, month + 1, dayOfMonth)
-                
+
                 // Ensure clock-out date is not before clock-in date
                 if (!newDate.isBefore(selectedClockInDate)) {
                     selectedClockOutDate = newDate
@@ -247,14 +247,14 @@ class TimeEntryDialogFragment : DialogFragment() {
             calendar.get(Calendar.DAY_OF_MONTH)
         ).show()
     }
-    
+
     private fun showClockInTimePicker() {
         TimePickerDialog(
             requireContext(),
             { _, hourOfDay, minute ->
                 selectedClockInTime = LocalTime.of(hourOfDay, minute)
                 updateClockInButtonText()
-                
+
                 // If clock-in time is after clock-out time, adjust clock-out time
                 if (selectedClockInTime.isAfter(selectedClockOutTime)) {
                     selectedClockOutTime = selectedClockInTime.plusHours(1)
@@ -266,13 +266,13 @@ class TimeEntryDialogFragment : DialogFragment() {
             false // 12-hour format
         ).show()
     }
-    
+
     private fun showClockOutTimePicker() {
         TimePickerDialog(
             requireContext(),
             { _, hourOfDay, minute ->
                 val newTime = LocalTime.of(hourOfDay, minute)
-                
+
                 // Detect potential night shift automatically
                 if (!selectedClockInDate.isEqual(selectedClockOutDate)) {
                     // Different days, any time is valid
@@ -288,7 +288,7 @@ class TimeEntryDialogFragment : DialogFragment() {
                     selectedClockOutDate = selectedClockInDate.plusDays(1)
                     selectedClockOutTime = newTime
                     updateClockOutButtonText()
-                    
+
                     // Inform the user
                     Toast.makeText(
                         requireContext(),
@@ -302,25 +302,25 @@ class TimeEntryDialogFragment : DialogFragment() {
             false // 12-hour format
         ).show()
     }
-    
+
     private fun updateClockInDateButtonText() {
         val formatter = DateTimeFormatter.ofPattern("EEE, MMM d, yyyy")
         datePickerButton.text = "Clock In: ${selectedClockInDate.format(formatter)}"
         datePickerButton.setTextColor(resources.getColor(R.color.accent, context?.theme))
     }
-    
+
     private fun updateClockInButtonText() {
         val formatter = DateTimeFormatter.ofPattern("h:mm a")
         clockInButton.text = "Clock In: ${selectedClockInTime.format(formatter)}"
         clockInButton.setTextColor(resources.getColor(R.color.accent, context?.theme))
     }
-    
+
     private fun updateClockOutButtonText() {
         val timeFormatter = DateTimeFormatter.ofPattern("h:mm a")
         val dateFormatter = DateTimeFormatter.ofPattern("MMM d")
-        
+
         val timeText = selectedClockOutTime.format(timeFormatter)
-        
+
         // Always include the date in the button text for clarity
         clockOutButton.text = if (!selectedClockInDate.isEqual(selectedClockOutDate)) {
             "Clock Out: $timeText (${selectedClockOutDate.format(dateFormatter)})"
@@ -328,16 +328,16 @@ class TimeEntryDialogFragment : DialogFragment() {
             "Clock Out: $timeText"
         }
     }
-    
+
     private fun updateBreakMinutesText() {
         breakMinutesText.text = "Break: $selectedBreakMinutes minutes"
         breakMinutesText.setTextColor(resources.getColor(R.color.accent, context?.theme))
     }
-    
+
     fun setOnSaveListener(listener: (LocalDateTime, LocalDateTime, Int) -> Unit) {
         onSaveListener = listener
     }
-    
+
     /**
      * Save a time entry to the repository
      */
@@ -345,11 +345,11 @@ class TimeEntryDialogFragment : DialogFragment() {
         employeeId?.let { id ->
             // Get the employee
             val employee = employeeRepository.getEmployeeById(id)
-            
+
             if (employee != null) {
                 // Store the employee name for future reference
                 employeeName = employee.name
-                
+
                 if (timeEntry != null) {
                     // Editing existing entry
                     val index = employee.timeEntries.indexOfFirst { it.id == timeEntry!!.id }
@@ -361,7 +361,7 @@ class TimeEntryDialogFragment : DialogFragment() {
                             clockOutTime = clockOutTime,
                             breakMinutes = breakMinutes
                         )
-                        
+
                         // Replace in list
                         employee.timeEntries[index] = updatedEntry
                     }
@@ -372,17 +372,17 @@ class TimeEntryDialogFragment : DialogFragment() {
                         clockOutTime = clockOutTime,
                         breakMinutes = breakMinutes
                     )
-                    
+
                     // Add to employee's entries
                     employee.timeEntries.add(newEntry)
                 }
-                
+
                 // Update employee in repository
                 employeeRepository.updateEmployee(employee)
-                
+
                 // Show success message
-                Toast.makeText(requireContext(), 
-                    "Time entry saved for ${employee.name}", 
+                Toast.makeText(requireContext(),
+                    "Time entry saved for ${employee.name}",
                     Toast.LENGTH_SHORT).show()
             }
         }
