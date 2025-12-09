@@ -1,11 +1,11 @@
-package com.labs.openlabor-mobile.ui.qrcode
+package com.labs.openlabor.ui.qrcode
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.labs.openlabor-mobile.data.EmployeeRepository
-import com.labs.openlabor-mobile.model.Employee
+import com.labs.openlabor.data.EmployeeRepository
+import com.labs.openlabor.model.Employee
 
 class QRCodeViewModel(application: Application) : AndroidViewModel(application) {
 

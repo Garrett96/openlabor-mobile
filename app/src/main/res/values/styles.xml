@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Card styles -->
-    <style name="CardView.openlabor-mobile" parent="Widget.MaterialComponents.CardView">
+    <style name="CardView.openlabor" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">@color/white</item>
         <item name="cardElevation">4dp</item>
         <item name="cardCornerRadius">8dp</item>
@@ -9,52 +9,52 @@
     </style>
 
     <!-- Text styles -->
-    <style name="TextAppearance.openlabor-mobile.Title" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="TextAppearance.openlabor.Title" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textColor">@color/primary</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextAppearance.openlabor-mobile.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
+    <style name="TextAppearance.openlabor.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
         <item name="android:textColor">@color/primary</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextAppearance.openlabor-mobile.Body" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="TextAppearance.openlabor.Body" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/black</item>
     </style>
 
     <!-- Button styles -->
-    <style name="Button.openlabor-mobile.Primary" parent="Widget.MaterialComponents.Button">
+    <style name="Button.openlabor.Primary" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/primary</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="Button.openlabor-mobile.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="Button.openlabor.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="strokeColor">@color/primary</item>
         <item name="android:textColor">@color/primary</item>
     </style>
 
-    <style name="Button.openlabor-mobile.Secondary" parent="Widget.MaterialComponents.Button">
+    <style name="Button.openlabor.Secondary" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/accent</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <!-- FloatingActionButton style -->
-    <style name="FAB.openlabor-mobile" parent="Widget.MaterialComponents.FloatingActionButton">
+    <style name="FAB.openlabor" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="backgroundTint">@color/accent</item>
         <item name="tint">@color/primary</item>
     </style>
 
     <!-- Chip styles -->
-    <style name="Chip.openlabor-mobile" parent="Widget.MaterialComponents.Chip.Action">
+    <style name="Chip.openlabor" parent="Widget.MaterialComponents.Chip.Action">
         <item name="chipBackgroundColor">@color/primary_light</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
     <!-- Switch style -->
-    <style name="Switch.openlabor-mobile" parent="Widget.MaterialComponents.CompoundButton.Switch">
+    <style name="Switch.openlabor" parent="Widget.MaterialComponents.CompoundButton.Switch">
         <item name="thumbTint">@color/accent</item>
         <item name="trackTint">@color/primary_light</item>
     </style>

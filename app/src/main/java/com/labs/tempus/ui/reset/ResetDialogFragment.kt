@@ -1,12 +1,12 @@
-package com.labs.openlabor-mobile.ui.reset
+package com.labs.openlabor.ui.reset
 
 import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
-import com.labs.openlabor-mobile.R
-import com.labs.openlabor-mobile.data.EmployeeRepository
+import com.labs.openlabor.R
+import com.labs.openlabor.data.EmployeeRepository
 
 /**
  * Dialog fragment for confirming and handling data reset
@@ -14,7 +14,7 @@ import com.labs.openlabor-mobile.data.EmployeeRepository
 class ResetDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(requireContext(), R.style.Theme_openlabor-mobile_Dialog)
+        return AlertDialog.Builder(requireContext(), R.style.Theme_openlabor_Dialog)
             .setTitle(R.string.menu_reset)
             .setMessage(R.string.dialog_reset_confirm)
             .setPositiveButton(R.string.dialog_confirm) { _, _ ->

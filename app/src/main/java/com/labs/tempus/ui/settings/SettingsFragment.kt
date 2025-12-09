@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile.ui.settings
+package com.labs.openlabor.ui.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.slider.Slider
-import com.labs.openlabor-mobile.databinding.FragmentSettingsBinding
+import com.labs.openlabor.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
 

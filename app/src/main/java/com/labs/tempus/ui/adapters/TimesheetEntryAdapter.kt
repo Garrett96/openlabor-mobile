@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile.ui.adapters
+package com.labs.openlabor.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.labs.openlabor-mobile.R
-import com.labs.openlabor-mobile.model.TimeEntry
+import com.labs.openlabor.R
+import com.labs.openlabor.model.TimeEntry
 
 /**
  * Adapter for displaying time entries in the timesheet/summary view

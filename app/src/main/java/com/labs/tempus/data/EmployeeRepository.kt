@@ -1,19 +1,19 @@
-package com.labs.openlabor-mobile.data
+package com.labs.openlabor.data
 
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.reflect.TypeToken
-import com.labs.openlabor-mobile.model.Employee
-import com.labs.openlabor-mobile.util.GsonUtils
-import com.labs.openlabor-mobile.model.EmployeeType
-import com.labs.openlabor-mobile.model.TimeEntry
+import com.labs.openlabor.model.Employee
+import com.labs.openlabor.util.GsonUtils
+import com.labs.openlabor.model.EmployeeType
+import com.labs.openlabor.model.TimeEntry
 import java.lang.reflect.Type
 import java.time.LocalDateTime
 
 class EmployeeRepository private constructor(context: Context) {
 
     companion object {
-        private const val PREFS_NAME = "openlabor-mobile_preferences"
+        private const val PREFS_NAME = "openlabor_preferences"
         private const val KEY_EMPLOYEES = "employees"
 
         @Volatile

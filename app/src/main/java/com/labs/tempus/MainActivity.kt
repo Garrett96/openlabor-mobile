@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile
+package com.labs.openlabor
 
 import android.os.Bundle
 import android.view.Menu
@@ -6,7 +6,7 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import com.google.android.material.navigation.NavigationView
-import com.labs.openlabor-mobile.data.EmployeeRepository
+import com.labs.openlabor.data.EmployeeRepository
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -14,7 +14,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.labs.openlabor-mobile.databinding.ActivityMainBinding
+import com.labs.openlabor.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.appBarMain.fab.setOnClickListener { _ ->
             val repository = EmployeeRepository.getInstance(this)
-            com.labs.openlabor-mobile.util.AddTimeEntryHelper.showAddTimeEntryDialog(
+            com.labs.openlabor.util.AddTimeEntryHelper.showAddTimeEntryDialog(
                 this,
                 supportFragmentManager,
                 repository

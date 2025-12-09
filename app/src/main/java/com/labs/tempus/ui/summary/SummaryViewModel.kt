@@ -1,12 +1,12 @@
-package com.labs.openlabor-mobile.ui.summary
+package com.labs.openlabor.ui.summary
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.labs.openlabor-mobile.data.EmployeeRepository
-import com.labs.openlabor-mobile.model.Employee
-import com.labs.openlabor-mobile.model.EmployeeType
+import com.labs.openlabor.data.EmployeeRepository
+import com.labs.openlabor.model.Employee
+import com.labs.openlabor.model.EmployeeType
 
 class SummaryViewModel(application: Application) : AndroidViewModel(application) {
 

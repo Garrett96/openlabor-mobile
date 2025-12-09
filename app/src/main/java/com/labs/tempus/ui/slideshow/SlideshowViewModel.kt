@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile.ui.slideshow
+package com.labs.openlabor.ui.slideshow
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

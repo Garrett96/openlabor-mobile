@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile.ui.dialogs
+package com.labs.openlabor.ui.dialogs
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -13,9 +13,9 @@ import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.labs.openlabor-mobile.R
-import com.labs.openlabor-mobile.data.EmployeeRepository
-import com.labs.openlabor-mobile.model.TimeEntry
+import com.labs.openlabor.R
+import com.labs.openlabor.data.EmployeeRepository
+import com.labs.openlabor.model.TimeEntry
 import java.time.LocalDate
 import java.io.Serializable
 import java.time.LocalDateTime
@@ -176,7 +176,7 @@ class TimeEntryDialogFragment : DialogFragment() {
 
         // Create dialog
         val title = if (timeEntry == null) "Add Time Entry for $employeeName" else "Edit Time Entry for $employeeName"
-        return AlertDialog.Builder(requireContext(), R.style.Theme_openlabor-mobile_Dialog)
+        return AlertDialog.Builder(requireContext(), R.style.Theme_openlabor_Dialog)
             .setTitle(title)
             .setView(layout as View)
             .setPositiveButton("Save") { _, _ ->

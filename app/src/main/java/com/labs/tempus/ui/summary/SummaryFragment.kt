@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile.ui.summary
+package com.labs.openlabor.ui.summary
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.labs.openlabor-mobile.data.EmployeeRepository
-import com.labs.openlabor-mobile.databinding.FragmentSummaryBinding
-import com.labs.openlabor-mobile.model.Employee
-import com.labs.openlabor-mobile.model.EmployeeType
-import com.labs.openlabor-mobile.model.TimeEntry
-import com.labs.openlabor-mobile.ui.adapters.EmployeeSummaryAdapter
-import com.labs.openlabor-mobile.ui.dialogs.TimeEntryDialogFragment
+import com.labs.openlabor.data.EmployeeRepository
+import com.labs.openlabor.databinding.FragmentSummaryBinding
+import com.labs.openlabor.model.Employee
+import com.labs.openlabor.model.EmployeeType
+import com.labs.openlabor.model.TimeEntry
+import com.labs.openlabor.ui.adapters.EmployeeSummaryAdapter
+import com.labs.openlabor.ui.dialogs.TimeEntryDialogFragment
 
 class SummaryFragment : Fragment() {
 

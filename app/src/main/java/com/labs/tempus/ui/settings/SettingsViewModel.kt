@@ -1,11 +1,11 @@
-package com.labs.openlabor-mobile.ui.settings
+package com.labs.openlabor.ui.settings
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.labs.openlabor-mobile.data.EmployeeRepository
+import com.labs.openlabor.data.EmployeeRepository
 import kotlinx.coroutines.launch
 
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {

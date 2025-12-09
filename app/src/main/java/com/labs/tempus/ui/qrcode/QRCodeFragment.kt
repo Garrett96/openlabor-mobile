@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile.ui.qrcode
+package com.labs.openlabor.ui.qrcode
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,11 +9,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.labs.openlabor-mobile.QRScannerActivity
-import com.labs.openlabor-mobile.R
-import com.labs.openlabor-mobile.databinding.FragmentQrCodeBinding
-import com.labs.openlabor-mobile.model.Employee
-import com.labs.openlabor-mobile.util.QRCodeGenerator
+import com.labs.openlabor.QRScannerActivity
+import com.labs.openlabor.R
+import com.labs.openlabor.databinding.FragmentQrCodeBinding
+import com.labs.openlabor.model.Employee
+import com.labs.openlabor.util.QRCodeGenerator
 
 class QRCodeFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile.model
+package com.labs.openlabor.model
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

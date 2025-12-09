@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "openlabor-mobile"
+rootProject.name = "openlabor"
 include(":app")

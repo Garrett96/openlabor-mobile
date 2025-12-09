@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile
+package com.labs.openlabor
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.labs.openlabor-mobile", appContext.packageName)
+        assertEquals("com.labs.openlabor", appContext.packageName)
     }
 }

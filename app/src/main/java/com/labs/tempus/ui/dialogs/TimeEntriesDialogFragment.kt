@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile.ui.dialogs
+package com.labs.openlabor.ui.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -14,11 +14,11 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.labs.openlabor-mobile.R
-import com.labs.openlabor-mobile.model.Employee
-import com.labs.openlabor-mobile.model.TimeEntry
-import com.labs.openlabor-mobile.ui.adapters.TimeEntryAdapter
-import com.labs.openlabor-mobile.ui.home.HomeViewModel
+import com.labs.openlabor.R
+import com.labs.openlabor.model.Employee
+import com.labs.openlabor.model.TimeEntry
+import com.labs.openlabor.ui.adapters.TimeEntryAdapter
+import com.labs.openlabor.ui.home.HomeViewModel
 import java.time.LocalDateTime
 import java.io.Serializable
 
@@ -171,7 +171,7 @@ class TimeEntriesDialogFragment : DialogFragment() {
     }
 
     private fun showDeleteTimeEntryConfirmation(timeEntry: TimeEntry) {
-        AlertDialog.Builder(requireContext(), R.style.Theme_openlabor-mobile_Dialog)
+        AlertDialog.Builder(requireContext(), R.style.Theme_openlabor_Dialog)
             .setTitle("Delete Time Entry")
             .setMessage("Are you sure you want to delete this time entry?")
             .setPositiveButton("Delete") { _, _ ->

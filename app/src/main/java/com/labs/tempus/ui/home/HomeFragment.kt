@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile.ui.home
+package com.labs.openlabor.ui.home
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -15,13 +15,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.labs.openlabor-mobile.R
-import com.labs.openlabor-mobile.databinding.FragmentHomeBinding
-import com.labs.openlabor-mobile.model.Employee
-import com.labs.openlabor-mobile.model.EmployeeType
-import com.labs.openlabor-mobile.model.TimeEntry
-import com.labs.openlabor-mobile.ui.adapters.EmployeeAdapter
-import com.labs.openlabor-mobile.ui.adapters.TimeEntryAdapter
+import com.labs.openlabor.R
+import com.labs.openlabor.databinding.FragmentHomeBinding
+import com.labs.openlabor.model.Employee
+import com.labs.openlabor.model.EmployeeType
+import com.labs.openlabor.model.TimeEntry
+import com.labs.openlabor.ui.adapters.EmployeeAdapter
+import com.labs.openlabor.ui.adapters.TimeEntryAdapter
 import java.util.Timer
 import java.util.TimerTask
 
@@ -146,7 +146,7 @@ class HomeFragment : Fragment() {
         layout.addView(typeSpinner)
 
         // Create and show dialog
-        AlertDialog.Builder(context, R.style.Theme_openlabor-mobile_Dialog)
+        AlertDialog.Builder(context, R.style.Theme_openlabor_Dialog)
             .setTitle(R.string.dialog_add_employee)
             .setView(layout)
             .setPositiveButton(R.string.action_save) { _, _ ->
@@ -189,7 +189,7 @@ class HomeFragment : Fragment() {
         layout.addView(typeSpinner)
 
         // Create and show dialog
-        AlertDialog.Builder(context, R.style.Theme_openlabor-mobile_Dialog)
+        AlertDialog.Builder(context, R.style.Theme_openlabor_Dialog)
             .setTitle(R.string.dialog_edit_employee)
             .setView(layout)
             .setPositiveButton(R.string.action_save) { _, _ ->
@@ -207,7 +207,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showDeleteConfirmationDialog(employee: Employee) {
-        AlertDialog.Builder(requireContext(), R.style.Theme_openlabor-mobile_Dialog)
+        AlertDialog.Builder(requireContext(), R.style.Theme_openlabor_Dialog)
             .setTitle("Delete Employee")
             .setMessage("Are you sure you want to delete ${employee.name}?")
             .setPositiveButton(R.string.action_delete) { _, _ ->
@@ -223,7 +223,7 @@ class HomeFragment : Fragment() {
      * Shows a dialog with time entries for an employee
      */
     private fun showTimeEntriesDialog(employee: Employee) {
-        val dialog = com.labs.openlabor-mobile.ui.dialogs.TimeEntriesDialogFragment.newInstance(employee)
+        val dialog = com.labs.openlabor.ui.dialogs.TimeEntriesDialogFragment.newInstance(employee)
         dialog.show(childFragmentManager, "TimeEntriesDialog")
     }
 

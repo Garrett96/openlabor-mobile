@@ -1,14 +1,14 @@
-package com.labs.openlabor-mobile.ui.home
+package com.labs.openlabor.ui.home
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.labs.openlabor-mobile.data.EmployeeRepository
-import com.labs.openlabor-mobile.model.Employee
-import com.labs.openlabor-mobile.model.EmployeeType
-import com.labs.openlabor-mobile.model.TimeEntry
+import com.labs.openlabor.data.EmployeeRepository
+import com.labs.openlabor.model.Employee
+import com.labs.openlabor.model.EmployeeType
+import com.labs.openlabor.model.TimeEntry
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {

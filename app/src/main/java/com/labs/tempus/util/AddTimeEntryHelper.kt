@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile.util
+package com.labs.openlabor.util
 
 import android.app.AlertDialog
 import android.content.Context
@@ -8,11 +8,11 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Spinner
 import androidx.fragment.app.FragmentManager
-import com.labs.openlabor-mobile.R
-import com.labs.openlabor-mobile.data.EmployeeRepository
-import com.labs.openlabor-mobile.model.Employee
-import com.labs.openlabor-mobile.model.EmployeeType
-import com.labs.openlabor-mobile.ui.dialogs.TimeEntryDialogFragment
+import com.labs.openlabor.R
+import com.labs.openlabor.data.EmployeeRepository
+import com.labs.openlabor.model.Employee
+import com.labs.openlabor.model.EmployeeType
+import com.labs.openlabor.ui.dialogs.TimeEntryDialogFragment
 
 object AddTimeEntryHelper {
 
@@ -26,7 +26,7 @@ object AddTimeEntryHelper {
 
         val employeeNames = employees.map { it.name }.toTypedArray()
 
-        AlertDialog.Builder(context, R.style.Theme_openlabor-mobile_Dialog)
+        AlertDialog.Builder(context, R.style.Theme_openlabor_Dialog)
             .setTitle("Select Employee")
             .setItems(employeeNames) { _, which ->
                 val selectedEmployee = employees[which]
@@ -67,7 +67,7 @@ object AddTimeEntryHelper {
         typeSpinner.adapter = typeAdapter
         layout.addView(typeSpinner)
 
-        AlertDialog.Builder(context, R.style.Theme_openlabor-mobile_Dialog)
+        AlertDialog.Builder(context, R.style.Theme_openlabor_Dialog)
             .setTitle("Add Employee")
             .setView(layout)
             .setPositiveButton("Save") { _, _ ->

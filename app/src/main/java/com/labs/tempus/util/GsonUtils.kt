@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile.util
+package com.labs.openlabor.util
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

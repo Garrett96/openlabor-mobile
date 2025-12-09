@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile.util
+package com.labs.openlabor.util
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -11,8 +11,8 @@ import com.google.zxing.qrcode.QRCodeWriter
 import com.google.zxing.EncodeHintType
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import java.util.EnumMap
-import com.labs.openlabor-mobile.model.Employee
-import com.labs.openlabor-mobile.model.TimeEntry
+import com.labs.openlabor.model.Employee
+import com.labs.openlabor.model.TimeEntry
 
 object QRCodeGenerator {
     private const val TAG = "QRCodeGenerator"

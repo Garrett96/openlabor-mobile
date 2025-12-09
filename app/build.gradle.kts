@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.labs.openlabor-mobile"
+    namespace = "com.labs.openlabor"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.labs.openlabor-mobile"
+        applicationId = "com.labs.openlabor"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

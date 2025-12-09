@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile
+package com.labs.openlabor
 
 import org.junit.Test
 

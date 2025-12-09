@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile
+package com.labs.openlabor
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -14,11 +14,11 @@ import com.google.gson.JsonSyntaxException
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
-import com.labs.openlabor-mobile.data.EmployeeRepository
-import com.labs.openlabor-mobile.databinding.ActivityQrScannerBinding
-import com.labs.openlabor-mobile.model.Employee
-import com.labs.openlabor-mobile.model.EmployeeType
-import com.labs.openlabor-mobile.model.TimeEntry
+import com.labs.openlabor.data.EmployeeRepository
+import com.labs.openlabor.databinding.ActivityQrScannerBinding
+import com.labs.openlabor.model.Employee
+import com.labs.openlabor.model.EmployeeType
+import com.labs.openlabor.model.TimeEntry
 import java.time.LocalDateTime
 import java.time.format.DateTimeParseException
 import java.util.UUID

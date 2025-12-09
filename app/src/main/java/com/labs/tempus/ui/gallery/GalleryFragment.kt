@@ -1,4 +1,4 @@
-package com.labs.openlabor-mobile.ui.gallery
+package com.labs.openlabor.ui.gallery
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.labs.openlabor-mobile.databinding.FragmentGalleryBinding
+import com.labs.openlabor.databinding.FragmentGalleryBinding
 
 class GalleryFragment : Fragment() {
 
