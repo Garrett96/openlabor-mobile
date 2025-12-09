@@ -107,10 +107,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="796ff313-d0be-4257-82db-aea7a3475c43" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/labs/openlabor/ui/adapters/EmployeeAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/labs/openlabor/ui/adapters/EmployeeAdapter.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,12 +256,12 @@
       <map>
         <entry key="com.labs.openlabor">
           <value>
-            <CheckInfo lastCheckTimestamp="1756750065241" />
+            <CheckInfo lastCheckTimestamp="1765280133647" />
           </value>
         </entry>
         <entry key="com.labs.openlabor.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1756750065237" />
+            <CheckInfo lastCheckTimestamp="1765280133632" />
           </value>
         </entry>
       </map>

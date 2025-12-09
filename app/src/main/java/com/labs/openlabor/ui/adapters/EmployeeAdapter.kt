@@ -58,9 +58,9 @@ class EmployeeAdapter(
                 val lastEntry = employee.timeEntries.lastOrNull()
                 if (lastEntry != null && lastEntry.clockOutTime != null) {
                     timeDetailsContainer.visibility = View.VISIBLE
-                    clockedInTextView.text = "Last in: ${lastEntry.getFormattedClockInTime()}"
+                    clockedInTextView.text = "Clock In: ${lastEntry.getFormattedClockInTime()}"
                     clockedOutTextView.visibility = View.VISIBLE
-                    clockedOutTextView.text = "Last out: ${lastEntry.getFormattedClockOutTime()}"
+                    clockedOutTextView.text = "Clock Out: ${lastEntry.getFormattedClockOutTime()}"
                 } else {
                     timeDetailsContainer.visibility = View.GONE
                 }
