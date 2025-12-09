@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Apply custom dialog themes
         setupDialogThemes()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -32,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        // Set up FAB to add time entries
         binding.appBarMain.fab.setOnClickListener { _ ->
             val repository = EmployeeRepository.getInstance(this)
             com.labs.tempus.util.AddTimeEntryHelper.showAddTimeEntryDialog(
@@ -42,15 +40,13 @@ class MainActivity : AppCompatActivity() {
             )
         }
         
-        // Update FAB icon and description to make it clear it adds time entries
         binding.appBarMain.fab.setImageResource(android.R.drawable.ic_menu_my_calendar)
         binding.appBarMain.fab.contentDescription = "Add Time Entry"
         
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_summary, R.id.nav_settings, R.id.nav_qrcode
@@ -61,7 +57,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
@@ -76,15 +71,12 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
     
-    /**
-     * Refresh all data in the app
-     */
+
     fun refreshData() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         val currentFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)
             ?.childFragmentManager?.fragments?.get(0)
             
-        // Refresh data based on current fragment
         when (navController.currentDestination?.id) {
             R.id.nav_home -> {
                 currentFragment?.let {
@@ -103,21 +95,16 @@ class MainActivity : AppCompatActivity() {
         }
     
     }
-    
-    /**
-     * Sets custom themes for dialogs
-     */
+
     private fun setupDialogThemes() {
-        // Set theme for AlertDialog
         try {
             AlertDialog.Builder::class.java.getDeclaredField("P").apply {
                 isAccessible = true
-                getInt(null) // Get the private static value
-                // You can't actually modify internal dialog themes this way,
-                // but we'll use custom themes with our dialog creations
+                getInt(null) 
+
             }
         } catch (e: Exception) {
-            // Safely handle any reflection errors
+        
         }
     }
 }
