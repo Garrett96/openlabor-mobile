@@ -16,9 +16,7 @@ import com.labs.openlabor.model.TimeEntry
 
 object QRCodeGenerator {
     private const val TAG = "QRCodeGenerator"
-
-turn The generated QR code bitmap, or null if generation failed
-     */
+    
     fun generateQRCode(content: String, width: Int = 500, height: Int = 500): Bitmap? {
         return try {
             val barcodeEncoder = BarcodeEncoder()
