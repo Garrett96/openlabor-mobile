@@ -4,7 +4,7 @@ Please note that this project is still in beta, so you may encounter bugs or unf
 
 The primary value-add is the QR gen/scan and being a potential offline solution for specific use cases. If you don't absolutely need these features, I would strongly recommend just using the webapp.
 
-<img width="922" height="2048" alt="image" src="https://github.com/user-attachments/assets/b11a657d-ec3f-47c2-8e5b-109027e4fb2c" />
+<img width="461" height="1024" alt="image" src="https://github.com/user-attachments/assets/b11a657d-ec3f-47c2-8e5b-109027e4fb2c" />
 
 
 ---
