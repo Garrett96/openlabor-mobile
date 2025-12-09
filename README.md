@@ -1,4 +1,4 @@
-# openlabor (β)
+# openlabor-mobile (β)
 
 Please note that the companion Android app is still in beta, so you may encounter bugs or unfinished features. It is currently designed as a standalone tool and does not have any functionality to sync with the webapp.
 
