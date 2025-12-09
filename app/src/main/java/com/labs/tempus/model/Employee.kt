@@ -4,9 +4,6 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 import java.util.UUID
 
-/**
- * Data class representing an employee in the timesheet tracker
- */
 data class Employee(
     @SerializedName("id")
     val id: String = UUID.randomUUID().toString(),
@@ -21,24 +18,15 @@ data class Employee(
     val timeEntries: MutableList<TimeEntry> = mutableListOf()
 ) : Serializable {
     
-    /**
-     * Calculate total hours worked for this employee
-     * @return Total hours worked, not including break times
-     */
     fun getTotalHours(): Float {
         return timeEntries.sumOf { it.getHoursWorked().toDouble() }.toFloat()
     }
     
-    /**
-     * Calculate hours for the current day
-     * @return Hours worked today
-     */
     fun getTodayHours(): Float {
         val today = java.time.LocalDate.now()
         return timeEntries
             .filter { 
                 val entryDate = it.clockInTime.toLocalDate()
-                // Include entries that started today or are overnight shifts that end today
                 entryDate.isEqual(today) || 
                 (it.isNightShift() && it.clockOutTime?.toLocalDate()?.isEqual(today) == true)
             }
@@ -46,34 +34,19 @@ data class Employee(
             .toFloat()
     }
     
-    /**
-     * Checks if the employee is currently clocked in
-     * @return True if the employee has an active time entry without a clock-out time
-     */
     fun isClockedIn(): Boolean {
         return timeEntries.any { it.clockOutTime == null }
     }
     
-    /**
-     * Get all night shift entries (spanning multiple days)
-     * @return List of time entries that cross midnight
-     */
     fun getNightShiftEntries(): List<TimeEntry> {
         return timeEntries.filter { it.isNightShift() }
     }
     
-    /**
-     * Get the current active time entry if the employee is clocked in
-     * @return The current active time entry or null if not clocked in
-     */
     fun getCurrentTimeEntry(): TimeEntry? {
         return timeEntries.find { it.clockOutTime == null }
     }
 }
 
-/**
- * Enum representing different employee types
- */
 enum class EmployeeType : Serializable {
     STAFF,
     TEMP,
