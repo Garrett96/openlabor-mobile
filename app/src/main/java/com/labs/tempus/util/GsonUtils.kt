@@ -13,15 +13,9 @@ import java.lang.reflect.Type
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-/**
- * Utility class for Gson serialization and deserialization
- */
 object GsonUtils {
     private val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
 
-    /**
-     * Create a Gson instance with custom type adapters for LocalDateTime
-     */
     fun createGson(): Gson {
         return GsonBuilder()
             .registerTypeAdapter(LocalDateTime::class.java, LocalDateTimeSerializer())
@@ -30,9 +24,6 @@ object GsonUtils {
             .create()
     }
 
-    /**
-     * Serializer for LocalDateTime objects
-     */
     private class LocalDateTimeSerializer : JsonSerializer<LocalDateTime> {
         override fun serialize(
             src: LocalDateTime,
@@ -43,9 +34,6 @@ object GsonUtils {
         }
     }
 
-    /**
-     * Deserializer for LocalDateTime objects
-     */
     private class LocalDateTimeDeserializer : JsonDeserializer<LocalDateTime> {
         override fun deserialize(
             json: JsonElement,
@@ -56,9 +44,6 @@ object GsonUtils {
         }
     }
     
-    /**
-     * Deserializer for nullable LocalDateTime objects
-     */
     private class LocalDateTimeNullableDeserializer : JsonDeserializer<LocalDateTime?> {
         override fun deserialize(
             json: JsonElement?,
